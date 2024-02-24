@@ -24,19 +24,6 @@ public class Usuario {
     @Column(nullable = false,unique = true)
     @NonNull
     private String email;
-    @NonNull
-    @Column
-    private String nombre;
-    @NonNull
-    @Column
-    private String apellido;
-    @NonNull
-    @Column(nullable = false)
-    private String dni;
-    @NonNull
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "domicilio_id",referencedColumnName = "id")
-    private Domicilio domicilio;
     @Column
     @NonNull
     private UsuarioRole usuarioRole;
