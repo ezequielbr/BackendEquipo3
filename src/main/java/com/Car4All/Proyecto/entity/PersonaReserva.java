@@ -21,7 +21,7 @@ public class PersonaReserva {
     private String apellido;
     @NonNull
     @Column(nullable = false)
-    private String dni;
+    private Integer dni;
     @NonNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "domicilio_id",referencedColumnName = "id")

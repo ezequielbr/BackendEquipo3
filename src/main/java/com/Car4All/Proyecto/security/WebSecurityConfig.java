@@ -1,6 +1,7 @@
 package com.Car4All.Proyecto.security;
 
-import com.DH.ClinicaOdontologica.service.UsuarioService;
+
+import com.Car4All.Proyecto.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
