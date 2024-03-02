@@ -30,7 +30,7 @@ public class ReservaController {
         if(reservaBuscada.isPresent()){
             logger.info("Se actualizo la reserva: " + reserva);
             reservaService.actualizarReserva(reserva);
-            return ResponseEntity.ok("Reserva: "+reserva.getNombre()+" actualizado con exito.");
+            return ResponseEntity.ok("Reserva con el id: "+reserva.getId()+" actualizado con exito.");
         }else{
             logger.info("No se actualizo la reserva: " + reserva);
             throw new ResourceNotFoundException("No se pudo encontrar la reserva con la id: "+reserva.getId()+".");
@@ -49,16 +49,28 @@ public class ReservaController {
         }
 
     }
-    @GetMapping("/buscar/{fecha}")
-    public ResponseEntity<Optional<Reserva>> buscarPorFecha(@PathVariable LocalDate fecha) throws ResourceNotFoundException{
-        logger.info("Llego la peticion de buscar un reserva con la fecha: "+fecha);
-        Optional<Reserva> reservaBuscada= reservaService.buscarPorFecha(fecha);
+    @GetMapping("/buscar/{fechaInicio}")
+    public ResponseEntity<Optional<Reserva>> buscarPorFechaInicio(@PathVariable LocalDate fechaInicio) throws ResourceNotFoundException{
+        logger.info("Llego la peticion de buscar un reserva con la fechaInicio: "+fechaInicio);
+        Optional<Reserva> reservaBuscada= reservaService.buscarPorFechaInicio(fechaInicio);
         if(reservaBuscada.isPresent()){
-            logger.info("Se encontro la reserva con la fecha: "+fecha);
+            logger.info("Se encontro la reserva con la fechaInicio: "+fechaInicio);
             return ResponseEntity.ok(reservaBuscada);
         }else{
-            logger.info("No se encontro la reserva con la fecha: "+fecha);
-            throw new ResourceNotFoundException("No se pudo encontrar la reserva con la fecha: "+fecha+".");
+            logger.info("No se encontro la reserva con la fechaInicio: "+fechaInicio);
+            throw new ResourceNotFoundException("No se pudo encontrar la reserva con la fechaInicio: "+fechaInicio+".");
+        }
+    }
+    @GetMapping("/buscar/{fechaFin}")
+    public ResponseEntity<Optional<Reserva>> buscarPorFechaFin(@PathVariable LocalDate fechaFin) throws ResourceNotFoundException{
+        logger.info("Llego la peticion de buscar un reserva con la fechaFin: "+fechaFin);
+        Optional<Reserva> reservaBuscada= reservaService.buscarPorFechaFin(fechaFin);
+        if(reservaBuscada.isPresent()){
+            logger.info("Se encontro la reserva con la fechaFin: "+fechaFin);
+            return ResponseEntity.ok(reservaBuscada);
+        }else{
+            logger.info("No se encontro la reserva con la fechaFin: "+fechaFin);
+            throw new ResourceNotFoundException("No se pudo encontrar la reserva con la fechaFin: "+fechaFin+".");
         }
     }
 

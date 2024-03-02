@@ -7,5 +7,7 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 public interface ReservaRepository extends JpaRepository<Reserva,Long> {
-    Optional<Reserva> findByFecha(LocalDate fecha);
+    Optional<Reserva> findByFechaInicio(LocalDate fechaInicio);
+    Optional<Reserva> findByFechaFin(LocalDate fechaFin);
+    Optional<Reserva> findByUsuario_Id(Long id);
 }

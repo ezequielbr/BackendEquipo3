@@ -39,9 +39,16 @@ public class UsuarioService  implements UserDetailsService {
         logger.info("Se esta llevando a cabo el proceso de Listar Usuarios");
         return usuarioRepository.findAll();
     }
-
+    public Optional<Usuario> buscarPorEmail(String email){
+        logger.info("Se esta llevando a cabo el proceso de buscar Usuario por Email");
+        return usuarioRepository.findByEmail(email);
+    }
+    public Optional<Usuario> buscarPorNombreUsuario(String nombreUsuario){
+        logger.info("Se esta llevando a cabo el proceso de buscar Usuario por Email");
+        return usuarioRepository.findByUserName(nombreUsuario);
+    }
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return usuarioRepository.findByUserName(username);
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        return usuarioRepository.findByUserName(userName).get();
     }
 }

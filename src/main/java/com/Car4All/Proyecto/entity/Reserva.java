@@ -30,5 +30,8 @@ public class Reserva {
 
     @NonNull
     @Column
-    private LocalDate fecha;
+    private LocalDate fechaInicio;
+    @NonNull
+    @Column
+    private LocalDate fechaFin;
 }

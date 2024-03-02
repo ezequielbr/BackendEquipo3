@@ -1,7 +1,7 @@
 package com.Car4All.Proyecto.security;
 
 import com.Car4All.Proyecto.entity.Domicilio;
-import com.Car4All.Proyecto.entity.UsuarioRole;
+import com.Car4All.Proyecto.entity.UsuarioRol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -28,9 +28,9 @@ public class CargadorInicial implements ApplicationRunner {
         BCryptPasswordEncoder cifrador = new BCryptPasswordEncoder();
         String clave = cifrador.encode("digital");
         System.out.println("Clave cifrada: "+cifrador);
-        Usuario usuario1= new Usuario("Ezequiel","ezequiel","ezequielbravo@digitalhouse.com",clave, UsuarioRole.ROLE_USER);
+        Usuario usuario1= new Usuario("Ezequiel","ezequiel","ezequielbravo@digitalhouse.com",clave, UsuarioRol.ROLE_USER);
         usuarioRepository.save(usuario1);
-        Usuario admin1= new Usuario("Vanesa","vanesa","vanesagarzon@digitalhouse.com",clave, UsuarioRole.ROLE_ADMIN);
+        Usuario admin1= new Usuario("Vanesa","vanesa","vanesagarzon@digitalhouse.com",clave, UsuarioRol.ROLE_ADMIN);
         usuarioRepository.save(admin1);
         Paciente paciente1= new Paciente("Ezequiel" ,"Bravo","1234", LocalDate.of(2023,9,05),new Domicilio("calle 2",23,"Caleta Olivia","Santa Cruz"),"ezequielbravo@digitalhouse.com");
         pacienteRepository.save(paciente1);
