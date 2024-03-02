@@ -1,10 +1,7 @@
 package com.Car4All.Proyecto.security;
 
-import com.DH.ClinicaOdontologica.entity.*;
-import com.DH.ClinicaOdontologica.repository.OdontologoRepository;
-import com.DH.ClinicaOdontologica.repository.PacienteRepository;
-import com.DH.ClinicaOdontologica.repository.TurnoRepository;
-import com.DH.ClinicaOdontologica.repository.UsuarioRepository;
+import com.Car4All.Proyecto.entity.Domicilio;
+import com.Car4All.Proyecto.entity.UsuarioRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

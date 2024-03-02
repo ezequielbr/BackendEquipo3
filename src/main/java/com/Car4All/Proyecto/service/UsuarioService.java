@@ -5,12 +5,15 @@ import com.Car4All.Proyecto.repository.UsuarioRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 @Service
-public class UsuarioService {
+public class UsuarioService  implements UserDetailsService {
     private static final Logger logger=  LogManager.getLogger(UsuarioService.class);
 
     @Autowired
@@ -35,5 +38,10 @@ public class UsuarioService {
     public List<Usuario> listarUsuarios(){
         logger.info("Se esta llevando a cabo el proceso de Listar Usuarios");
         return usuarioRepository.findAll();
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return usuarioRepository.findByUserName(username);
     }
 }
