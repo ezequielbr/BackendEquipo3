@@ -1,5 +1,6 @@
 package com.Car4All.Proyecto.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,7 +24,7 @@ public class Usuario implements UserDetails {
     private Long id;
     @Column(unique = true)
     @NonNull
-    private String nombreUsuario;
+    private String userName;
     @Column(nullable = false)
     @NonNull
     private String password;
@@ -32,26 +33,12 @@ public class Usuario implements UserDetails {
     private String email;
     @Column
     @NonNull
-    private UsuarioRol usuarioRol;
-    @Column
-    private String nombre;
-    @NonNull
-    @Column
-    private String apellido;
-    @NonNull
-    @Column
-    private Integer dni;
-    @NonNull
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "domicilio_id",referencedColumnName = "id")
-    private Domicilio domicilio;
-    @NonNull
-    @Column
-    private Boolean inicioSesion;
+    private UsuarioRole usuarioRole;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> roles = new ArrayList<>();
-        roles.add(new SimpleGrantedAuthority(usuarioRol.toString()));
+        roles.add(new SimpleGrantedAuthority(usuarioRole.toString()));
         return roles;
     }
 

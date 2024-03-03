@@ -18,13 +18,13 @@ public class ReservaService {
     @Autowired
     private ReservaRepository reservaRepository;
 
-    public Reserva guardarReserva(Reserva reserva){
+    public Reserva guardarReserva(Reserva auto){
         logger.info("Se esta llevando a cabo el proceso de Guardar Reserva");
-        return reservaRepository.save(reserva);
+        return reservaRepository.save(auto);
     }
-    public Reserva actualizarReserva(Reserva reserva){
+    public Reserva actualizarAuto(Reserva auto){
         logger.info("Se esta llevando a cabo el proceso de Actualizar Reserva");
-        return reservaRepository.save(reserva);
+        return reservaRepository.save(auto);
     }
     public void eliminarReserva(Long id){
         logger.info("Se esta llevando a cabo el proceso de Eliminar Reserva");
@@ -34,13 +34,9 @@ public class ReservaService {
         logger.info("Se esta llevando a cabo el proceso de buscar Reserva por Id");
         return reservaRepository.findById(id);
     }
-    public Optional<Reserva> buscarPorFechaInicio(LocalDate fechaInicio){
-        logger.info("Se esta llevando a cabo el proceso de buscar Reserva por fechaInicio");
-        return reservaRepository.findByFechaInicio(fechaInicio);
-    }
-    public Optional<Reserva> buscarPorFechaFin(LocalDate fechaFin){
-        logger.info("Se esta llevando a cabo el proceso de buscar Reserva por fechaFin");
-        return reservaRepository.findByFechaFin(fechaFin);
+    public Optional<Reserva> buscarPorFecha(LocalDate fecha){
+        logger.info("Se esta llevando a cabo el proceso de buscar Reserva por fecha");
+        return reservaRepository.findByFecha(fecha);
     }
     public List<Reserva> listarReservas(){
         logger.info("Se esta llevando a cabo el proceso de Listar Reservas");
