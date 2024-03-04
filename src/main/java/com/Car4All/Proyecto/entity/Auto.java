@@ -17,7 +17,7 @@ import java.util.Set;
 public class Auto {
 
     @Id
-
+/*comentario*/
     private Long autoId;
     private String modelo;
     private String marca;
