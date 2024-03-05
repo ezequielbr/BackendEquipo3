@@ -18,18 +18,15 @@ import java.util.List;
 @Table(name="categorias")
 
 public class Categoria {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NonNull
     @Column
     private String nombre;
-    @OneToMany(mappedBy ="categoria", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy ="categoria", fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Auto> autos= new HashSet<>();
 
-    // Nuestro método para añadir autos
-    public void agregarAuto(Auto auto) {
-        this.autos.add(auto);
-    }
 }

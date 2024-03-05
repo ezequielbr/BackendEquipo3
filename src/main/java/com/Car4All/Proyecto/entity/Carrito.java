@@ -23,8 +23,8 @@ public class Carrito {
     @OneToOne
     @JoinColumn(name ="usuario_id", referencedColumnName = "id")
     private Usuario usuario;
-    @OneToMany(mappedBy ="carrito", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @ManyToMany
+    @JoinTable(name = "carrito_autos", joinColumns = @JoinColumn(name = "carrito_id"), inverseJoinColumns = @JoinColumn(name = "auto_id"))
     private Set<Auto> autos= new HashSet<>();
     @NonNull
     @Column

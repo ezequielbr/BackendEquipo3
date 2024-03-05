@@ -15,7 +15,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/reservas")
 public class ReservaController {
-    private static final Logger logger= LogManager.getLogger(AutoController.class);
+    private static final Logger logger= LogManager.getLogger(ReservaController.class);
     @Autowired
     private ReservaService reservaService= new ReservaService();
     @PostMapping

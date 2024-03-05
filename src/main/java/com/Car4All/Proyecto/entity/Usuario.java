@@ -48,6 +48,9 @@ public class Usuario implements UserDetails {
     @NonNull
     @Column
     private Boolean inicioSesion;
+    @NonNull
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private Carrito carrito;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> roles = new ArrayList<>();

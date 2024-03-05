@@ -42,10 +42,7 @@ public class Auto {
     @NonNull
     @Column
     private Boolean recomendado;
-    @ManyToOne
-    @JoinColumn(name = "carrito_id", referencedColumnName = "id")
-    private Carrito carrito;
-    @ManyToOne
+    @ManyToMany
     @JoinColumn(name = "categoria_id", referencedColumnName = "id")
     private Categoria categoria;
 
