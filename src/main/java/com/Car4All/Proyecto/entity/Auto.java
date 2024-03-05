@@ -1,11 +1,10 @@
 package com.Car4All.Proyecto.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.;
-import lombok.;
 
-import java.util.HashSet;
-import java.util.Set;
+import jakarta.persistence.*;
+import lombok.*;
+
+
 
 @Getter
 @Setter
@@ -17,77 +16,37 @@ import java.util.Set;
 public class Auto {
 
     @Id
-/*comentario*/
-    private Long autoId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @NonNull
+    @Column
     private String modelo;
+    @NonNull
+    @Column
     private String marca;
+    @NonNull
+    @Column
     private Integer cantidadDePlazas;
+    @NonNull
+    @Column
     private String tipoCombustible;
+    @NonNull
+    @Column
     private String tipoCaja;
+    @NonNull
+    @Column
     private String tipoVehiculo;
+    @NonNull
+    @Column
     private String region;
+    @NonNull
+    @Column
+    private Boolean recomendado;
+    @ManyToOne
+    @JoinColumn(name = "carrito_id", referencedColumnName = "id")
+    private Carrito carrito;
+    @ManyToOne
+    @JoinColumn(name = "categoria_id", referencedColumnName = "id")
+    private Categoria categoria;
 
-    public Long getAutoId() {
-        return autoId;
-    }
-
-    public void setAutoId(Long autoId) {
-        this.autoId = autoId;
-    }
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
-    public Integer getCantidadDePlazas() {
-        return cantidadDePlazas;
-    }
-
-    public void setCantidadDePlazas(Integer cantidadDePlazas) {
-        this.cantidadDePlazas = cantidadDePlazas;
-    }
-
-    public String getTipoCombustible() {
-        return tipoCombustible;
-    }
-
-    public void setTipoCombustible(String tipoCombustible) {
-        this.tipoCombustible = tipoCombustible;
-    }
-
-    public String getTipoCaja() {
-        return tipoCaja;
-    }
-
-    public void setTipoCaja(String tipoCaja) {
-        this.tipoCaja = tipoCaja;
-    }
-
-    public String getTipoVehiculo() {
-        return tipoVehiculo;
-    }
-
-    public void setTipoVehiculo(String tipoVehiculo) {
-        this.tipoVehiculo = tipoVehiculo;
-    }
-
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
 }

@@ -17,17 +17,14 @@ public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @NonNull
     @OneToOne
     @JoinColumn(name ="usuario_id", referencedColumnName = "id")
     private Usuario usuario;
-
     @NonNull
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name ="auto_id", referencedColumnName = "id")
     private Auto auto;
-
     @NonNull
     @Column
     private LocalDate fechaInicio;

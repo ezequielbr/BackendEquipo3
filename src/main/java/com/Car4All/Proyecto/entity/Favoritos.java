@@ -1,51 +1,28 @@
 package com.Car4All.Proyecto.entity;
 
-import javax.annotation.processing.Generated;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
+import java.util.HashSet;
+import java.util.Set;
+@Getter
+@Setter
+@AllArgsConstructor
+@RequiredArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name="favoritos")
 public class Favoritos {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @NonNull
+    @OneToOne
+    @JoinColumn(name ="usuario_id", referencedColumnName = "id")
+    private Usuario usuario;
+    @OneToMany(mappedBy ="favoritos", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Auto> autos= new HashSet<>();
 
-    private Long favoritosId;
-    private Long usuarioId;
-    private List<Auto> autos = new ArrayList<>();
-
-    public Long getFavoritosId() {
-        return favoritosId;
-    }
-
-    public void setFavoritosId(Long favoritosId) {
-        this.favoritosId = favoritosId;
-    }
-
-    public Long getUsuarioId() {
-        return usuarioId;
-    }
-
-    public void setUsuarioId(Long usuarioId) {
-        this.usuarioId = usuarioId;
-    }
-
-    public List<Auto> getAutos() {
-        return autos;
-    }
-
-    public void setAutos(List<Auto> autos) {
-        this.autos = autos;
-    }
-
-    public void anadirItem(Auto auto){
-        this.autos.add(auto);
-    }
-
-    public void verDetalle(){
-        System.out.println("Favoritos ID: " + favoritosId);
-        System.out.println("Usuario ID: " + usuarioId);
-        System.out.println("Autos Favoritos");
-        for(Auto auto : autos){
-            System.out.println("- "+ auto.getMarca());
-        }
-    }
 }
