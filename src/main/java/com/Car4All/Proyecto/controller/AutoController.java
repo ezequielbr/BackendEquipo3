@@ -28,11 +28,11 @@ public class AutoController {
         logger.info("Llego la peticion de actualizar el auto: "+auto);
         Optional<Auto> autoBuscado= autoService.buscarPorId(auto.getId());
         if(autoBuscado.isPresent()){
-            logger.info("Se actualizo el auto: " + auto);
+            logger.info("Se actualizo el auto: " + auto.getModelo()+" con el id: "+auto.getId()+".");
             autoService.actualizarAuto(auto);
-            return ResponseEntity.ok("Auto: "+auto.getNombre()+" actualizado con exito.");
+            return ResponseEntity.ok("Auto: "+auto.getModelo()+" con el id: "+auto.getId()+" actualizado con exito.");
         }else{
-            logger.info("No se actualizo el auto: " + auto);
+            logger.info("No se actualizo el auto: " + auto.getModelo()+" con el id: "+auto.getId()+".");
             throw new ResourceNotFoundException("No se pudo encontrar el auto con el id: "+auto.getId()+".");
         }
     }

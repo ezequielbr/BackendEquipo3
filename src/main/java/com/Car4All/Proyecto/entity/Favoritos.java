@@ -21,7 +21,11 @@ public class Favoritos {
     @OneToOne
     @JoinColumn(name ="usuario_id", referencedColumnName = "id")
     private Usuario usuario;
-    @OneToMany(mappedBy ="favoritos", fetch = FetchType.LAZY)
+    @ManyToMany
+    @JoinTable(
+            name = "favoritos_autos",
+            joinColumns = @JoinColumn(name = "favorito_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "auto_id", referencedColumnName = "id"))
     @JsonIgnore
     private Set<Auto> autos= new HashSet<>();
 

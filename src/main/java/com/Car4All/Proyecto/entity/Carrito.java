@@ -24,7 +24,11 @@ public class Carrito {
     @JoinColumn(name ="usuario_id", referencedColumnName = "id")
     private Usuario usuario;
     @ManyToMany
-    @JoinTable(name = "carrito_autos", joinColumns = @JoinColumn(name = "carrito_id"), inverseJoinColumns = @JoinColumn(name = "auto_id"))
+    @JoinTable(
+            name = "carrito_autos",
+            joinColumns = @JoinColumn(name = "carrito_id",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "auto_id",referencedColumnName = "id"))
+    @JsonIgnore
     private Set<Auto> autos= new HashSet<>();
     @NonNull
     @Column

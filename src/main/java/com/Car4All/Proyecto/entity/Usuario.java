@@ -42,15 +42,18 @@ public class Usuario implements UserDetails {
     @Column
     private Integer dni;
     @NonNull
+    @Column
+    private Boolean inicioSesion;
+    @NonNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "domicilio_id",referencedColumnName = "id")
     private Domicilio domicilio;
     @NonNull
-    @Column
-    private Boolean inicioSesion;
-    @NonNull
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
     private Carrito carrito;
+    @NonNull
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private Favoritos favoritos;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> roles = new ArrayList<>();

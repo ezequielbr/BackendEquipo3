@@ -46,9 +46,16 @@ public class Auto {
     @Column
     private Boolean recomendado;
 
+    @ManyToMany(mappedBy = "autos", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Carrito> carritos= new HashSet<>();
+
     @ManyToMany(mappedBy ="autos", fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Categoria> categorias= new HashSet<>();
 
+    @ManyToMany(mappedBy ="autos", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Favoritos> favoritos= new HashSet<>();
 
 }

@@ -9,14 +9,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
 
-@Data
+@Getter
+@Setter
+@RequiredArgsConstructor
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 @Table(name="categorias")
-
 public class Categoria {
 
     @Id
@@ -26,7 +26,11 @@ public class Categoria {
     @Column
     private String nombre;
     @ManyToMany
-    @JoinTable(name = "categoria_autos",joinColumns = @JoinColumn(name = "categoria_id"), inverseJoinColumns = @JoinColumn(name = "auto_id"))
+    @JoinTable(
+            name = "categoria_autos",
+            joinColumns = @JoinColumn(name = "categoria_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "auto_id", referencedColumnName = "id"))
+    @JsonIgnore
     private Set<Auto> autos= new HashSet<>();
 
 }
