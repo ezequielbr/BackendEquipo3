@@ -1,6 +1,8 @@
 package com.Car4All.Proyecto.service;
 
+import com.Car4All.Proyecto.entity.Auto;
 import com.Car4All.Proyecto.entity.Categoria;
+import com.Car4All.Proyecto.repository.AutoRepository;
 import com.Car4All.Proyecto.repository.CategoriaRepository;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ public class CategoriaService {
 
     @Autowired
     private CategoriaRepository categoriaRepository;
+    @Autowired
+    private AutoRepository autoRepository;
 
     public Categoria guardarCategoria(Categoria categoria){
         logger.info("Se esta llevando a cabo el proceso de Guardar Categoria");
@@ -40,6 +44,38 @@ public class CategoriaService {
     public List<Categoria> listarCategorias(){
         logger.info("Se esta llevando a cabo el proceso de Listar Categorias");
         return categoriaRepository.findAll();
+    }
+    public Optional<Categoria> agregarAutoACategoria(Long categoriaId, Long autoId) {
+        Optional<Categoria> categoriaOptional = categoriaRepository.findById(categoriaId);
+        Optional<Auto> autoOptional = autoRepository.findById(autoId);
+
+        if (categoriaOptional.isPresent() && autoOptional.isPresent()) {
+            Categoria categoria = categoriaOptional.get();
+            Auto auto = autoOptional.get();
+
+            categoria.getAutos().add(auto);
+            categoriaRepository.save(categoria);
+
+            return Optional.of(categoria);
+        } else {
+            return Optional.empty(); // Categoria o auto no encontrado
+        }
+    }
+    public Optional<Categoria> eliminarAutoDeCategoria(Long categoriaId, Long autoId) {
+        Optional<Categoria> categoriaOptional = categoriaRepository.findById(categoriaId);
+        Optional<Auto> autoOptional = autoRepository.findById(autoId);
+
+        if (categoriaOptional.isPresent() && autoOptional.isPresent()) {
+            Categoria categoria = categoriaOptional.get();
+            Auto auto = autoOptional.get();
+
+            categoria.getAutos().remove(auto);
+            categoriaRepository.save(categoria);
+
+            return Optional.of(categoria);
+        } else {
+            return Optional.empty(); // Categoria o auto no encontrado
+        }
     }
 }
 

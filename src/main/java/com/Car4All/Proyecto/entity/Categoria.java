@@ -25,8 +25,8 @@ public class Categoria {
     @NonNull
     @Column
     private String nombre;
-    @ManyToMany(mappedBy ="categoria", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @ManyToMany
+    @JoinTable(name = "categoria_autos",joinColumns = @JoinColumn(name = "categoria_id"), inverseJoinColumns = @JoinColumn(name = "auto_id"))
     private Set<Auto> autos= new HashSet<>();
 
 }

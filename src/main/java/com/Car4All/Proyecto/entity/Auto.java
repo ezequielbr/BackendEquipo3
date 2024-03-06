@@ -1,9 +1,12 @@
 package com.Car4All.Proyecto.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Getter
@@ -42,8 +45,10 @@ public class Auto {
     @NonNull
     @Column
     private Boolean recomendado;
-    @ManyToMany
-    @JoinColumn(name = "categoria_id", referencedColumnName = "id")
-    private Categoria categoria;
+
+    @ManyToMany(mappedBy ="autos", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Categoria> categorias= new HashSet<>();
+
 
 }
