@@ -1,4 +1,4 @@
-package com.Car4All.Proyecto.security;
+/*package com.Car4All.Proyecto.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,4 +10,4 @@ public class PasswordEncoder {
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
     }
-}
+}*/

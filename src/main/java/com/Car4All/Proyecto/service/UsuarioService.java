@@ -45,10 +45,10 @@ public class UsuarioService  implements UserDetailsService {
     }
     public Optional<Usuario> buscarPorNombreUsuario(String nombreUsuario){
         logger.info("Se esta llevando a cabo el proceso de buscar Usuario por Email");
-        return usuarioRepository.findByUserName(nombreUsuario);
+        return usuarioRepository.findByNombreUsuario(nombreUsuario);
     }
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        return usuarioRepository.findByUserName(userName).get();
+        return usuarioRepository.findByNombreUsuario(userName).get();
     }
 }

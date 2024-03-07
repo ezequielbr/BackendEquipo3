@@ -45,6 +45,9 @@ public class Auto {
     @NonNull
     @Column
     private Boolean recomendado;
+    @NonNull
+    @Column
+    private String matricula;
 
     @ManyToMany(mappedBy = "autos", fetch = FetchType.LAZY)
     @JsonIgnore

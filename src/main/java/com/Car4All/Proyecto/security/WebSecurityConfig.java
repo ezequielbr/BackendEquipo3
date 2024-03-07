@@ -1,4 +1,4 @@
-package com.Car4All.Proyecto.security;
+/*package com.Car4All.Proyecto.security;
 
 
 import com.Car4All.Proyecto.service.UsuarioService;
@@ -49,4 +49,4 @@ public class WebSecurityConfig {
                     .logout();
     }
 
-}
+}*/

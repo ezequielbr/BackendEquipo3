@@ -7,12 +7,13 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("/autos")
 public class AutoController {
     private static final Logger logger= LogManager.getLogger(AutoController.class);
@@ -66,7 +67,7 @@ public class AutoController {
     public ResponseEntity<List<Auto>> listarAutos() throws ResourceNotFoundException{
         logger.info("Llego la peticion de listar todos los autos");
         List<Auto> listaAutos = autoService.listarAutos();
-        if(listaAutos.size() > 0){
+        if(!listaAutos.isEmpty()){
             logger.info("Existen autos");
             return ResponseEntity.ok(listaAutos);
         }else{

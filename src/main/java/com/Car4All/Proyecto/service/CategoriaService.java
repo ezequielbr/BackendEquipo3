@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.apache.logging.log4j.Logger;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -58,7 +57,7 @@ public class CategoriaService {
 
             return Optional.of(categoria);
         } else {
-            return Optional.empty(); // Categoria o auto no encontrado
+            return Optional.empty();
         }
     }
     public Optional<Categoria> eliminarAutoDeCategoria(Long categoriaId, Long autoId) {
@@ -74,7 +73,7 @@ public class CategoriaService {
 
             return Optional.of(categoria);
         } else {
-            return Optional.empty(); // Categoria o auto no encontrado
+            return Optional.empty();
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.Car4All.Proyecto.security;
+/*package com.Car4All.Proyecto.security;
 
 import com.Car4All.Proyecto.entity.Domicilio;
 import com.Car4All.Proyecto.entity.UsuarioRol;
@@ -12,6 +12,9 @@ import java.time.LocalDate;
 
 @Component
 public class CargadorInicial implements ApplicationRunner {
+
+
+}
     @Autowired
     private UsuarioRepository usuarioRepository;
     @Autowired
@@ -40,4 +43,4 @@ public class CargadorInicial implements ApplicationRunner {
         turnoRepository.save(turno1);
 
     }
-}
+}*/
