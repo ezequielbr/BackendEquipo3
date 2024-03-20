@@ -10,19 +10,13 @@ import java.util.Set;
 @Getter
 @Setter
 @AllArgsConstructor
-@RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name="carritos")
 public class Carrito {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NonNull
-    @OneToOne
-    @JoinColumn(name ="usuario_id", referencedColumnName = "id")
-    private Usuario usuario;
     @ManyToMany
     @JoinTable(
             name = "carrito_autos",
@@ -30,8 +24,5 @@ public class Carrito {
             inverseJoinColumns = @JoinColumn(name = "auto_id",referencedColumnName = "id"))
     @JsonIgnore
     private Set<Auto> autos= new HashSet<>();
-    @NonNull
-    @Column
-    private LocalDate fechaAdicion;
 
 }

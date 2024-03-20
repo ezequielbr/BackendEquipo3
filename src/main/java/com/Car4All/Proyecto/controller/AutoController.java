@@ -24,7 +24,7 @@ public class AutoController {
         logger.info("Llego la peticion de registrar el auto: "+auto);
         return ResponseEntity.ok(autoService.guardarAuto(auto));
     }
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<String> actualizarAuto(@RequestBody Auto auto) throws ResourceNotFoundException {
         logger.info("Llego la peticion de actualizar el auto: "+auto);
         Optional<Auto> autoBuscado= autoService.buscarPorId(auto.getId());
@@ -37,7 +37,7 @@ public class AutoController {
             throw new ResourceNotFoundException("No se pudo encontrar el auto con el id: "+auto.getId()+".");
         }
     }
-    @GetMapping("/buscar/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Optional<Auto>> buscarPorId(@PathVariable Long id) throws ResourceNotFoundException {
         logger.info("Llego la peticion de buscar un auto con el id: "+id);
         Optional<Auto> autoBuscado= autoService.buscarPorId(id);

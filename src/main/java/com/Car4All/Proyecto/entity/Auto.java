@@ -5,13 +5,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 
 @Getter
 @Setter
-@AllArgsConstructor
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -48,17 +48,20 @@ public class Auto {
     @NonNull
     @Column
     private String matricula;
+    @NonNull
+    @Column
+    private Boolean isReservado;
 
     @ManyToMany(mappedBy = "autos", fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Carrito> carritos= new HashSet<>();
-
     @ManyToMany(mappedBy ="autos", fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Categoria> categorias= new HashSet<>();
-
     @ManyToMany(mappedBy ="autos", fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Favoritos> favoritos= new HashSet<>();
-
+    @OneToMany
+    @JoinColumn(name = "valoracion_id",referencedColumnName = "id")
+    private Set<Valoracion> valoraciones= new HashSet<>();
 }
