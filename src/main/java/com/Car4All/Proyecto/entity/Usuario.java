@@ -1,6 +1,7 @@
 package com.Car4All.Proyecto.entity;
 
 
+import jakarta.annotation.PostConstruct;
 import jakarta.persistence.*;
 import lombok.*;
 //import org.springframework.security.core.GrantedAuthority;
@@ -57,7 +58,11 @@ public class Usuario /*implements UserDetails*/ {
     @JoinColumn(name = "valoracion_id",referencedColumnName = "id")
     private Set<Valoracion> valoraciones= new HashSet<>();
 
-
+    @PostConstruct
+    private void init() {
+        carrito = new Carrito();
+        favoritos = new Favoritos();
+    }
 
 //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {
