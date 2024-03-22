@@ -64,4 +64,7 @@ public class Auto {
     @OneToMany
     @JoinColumn(name = "valoracion_id",referencedColumnName = "id")
     private Set<Valoracion> valoraciones= new HashSet<>();
+    @OneToMany
+    @JoinColumn(name = "reservas_id",referencedColumnName = "id")
+    private Set<Reserva> reservas= new HashSet<>();
 }

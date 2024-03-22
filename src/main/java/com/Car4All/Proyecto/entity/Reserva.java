@@ -22,7 +22,7 @@ public class Reserva {
     @JoinColumn(name ="usuario_id", referencedColumnName = "id")
     private Usuario usuario;
     @NonNull
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name ="auto_id", referencedColumnName = "id")
     private Auto auto;
     @NonNull

@@ -18,7 +18,7 @@ public class Valoracion {
     private Integer puntaje;
     @NonNull
     @Column
-    private String comentario;
+    private String opinion;
     @NonNull
     @ManyToOne
     @JoinColumn(name ="usuario_id", referencedColumnName = "id")

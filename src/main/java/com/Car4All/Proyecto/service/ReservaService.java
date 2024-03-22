@@ -1,6 +1,8 @@
 package com.Car4All.Proyecto.service;
 
+import com.Car4All.Proyecto.entity.Auto;
 import com.Car4All.Proyecto.entity.Reserva;
+import com.Car4All.Proyecto.exception.BadRequestException;
 import com.Car4All.Proyecto.repository.ReservaRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ReservaService {
@@ -18,8 +21,18 @@ public class ReservaService {
     @Autowired
     private ReservaRepository reservaRepository;
 
-    public Reserva guardarReserva(Reserva reserva){
+
+    public Reserva guardarReserva(Reserva reserva) throws BadRequestException {
         logger.info("Se esta llevando a cabo el proceso de Guardar Reserva");
+        Auto auto = reserva.getAuto();
+        Set<Reserva> reservas= auto.getReservas();
+        for(Reserva reserva1 : reservas){
+            if (reserva.getFechaInicio().isEqual(reserva1.getFechaInicio()) ||
+                    reserva.getFechaFin().isEqual(reserva1.getFechaFin()) ||
+                    (reserva.getFechaInicio().isBefore(reserva1.getFechaFin()) && reserva.getFechaFin().isAfter(reserva1.getFechaInicio()))) {
+                throw new BadRequestException("No se puede realizar la reserva en fechas donde el auto se encuentra reservado");
+            }
+        }
         return reservaRepository.save(reserva);
     }
     public Reserva actualizarReserva(Reserva reserva){
@@ -46,4 +59,5 @@ public class ReservaService {
         logger.info("Se esta llevando a cabo el proceso de Listar Reservas");
         return reservaRepository.findAll();
     }
+
 }
