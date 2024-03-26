@@ -1,6 +1,7 @@
 package com.Car4All.Proyecto.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.annotation.PostConstruct;
 import jakarta.persistence.*;
 import lombok.*;
@@ -50,19 +51,22 @@ public class Usuario /*implements UserDetails*/ {
     private Domicilio domicilio;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "carrito_id",referencedColumnName = "id")
-    private Carrito carrito;
+    @JsonIgnore
+    private Carrito carrito = new Carrito();
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "favoritos_id",referencedColumnName = "id")
-    private Favoritos favoritos;
+    @JsonIgnore
+    private Favoritos favoritos = new Favoritos();;
     @OneToMany
     @JoinColumn(name = "valoracion_id",referencedColumnName = "id")
+    @JsonIgnore
     private Set<Valoracion> valoraciones= new HashSet<>();
 
-    @PostConstruct
-    private void init() {
-        carrito = new Carrito();
-        favoritos = new Favoritos();
-    }
+
+//    private void init() {
+//        carrito = new Carrito();
+//        favoritos = new Favoritos();
+//    }
 
 //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {

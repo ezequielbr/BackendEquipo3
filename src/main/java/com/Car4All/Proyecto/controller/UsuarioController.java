@@ -50,7 +50,7 @@ public class UsuarioController {
         }
 
     }
-    @GetMapping("/buscar/{email}")
+    @GetMapping("/buscar/email/{email}")
     public ResponseEntity<Optional<Usuario>> buscarPorEmail(@PathVariable String email) throws ResourceNotFoundException{
         logger.info("Llego la peticion de buscar un usuario con la email: "+email);
         Optional<Usuario> usuarioBuscado= usuarioService.buscarPorEmail(email);
@@ -62,7 +62,7 @@ public class UsuarioController {
             throw new ResourceNotFoundException("No se pudo encontrar el usuario con la email: "+email+".");
         }
     }
-    @GetMapping("/buscar/{nombreUsuario}")
+    @GetMapping("/buscar/nombre/{nombreUsuario}")
     public ResponseEntity<Optional<Usuario>> buscarPorNombreUsuario(@PathVariable String nombreUsuario) throws ResourceNotFoundException {
         logger.info("Llego la peticion de buscar un usuario con la nombreUsuario: "+nombreUsuario);
         Optional<Usuario> usuarioBuscado= usuarioService.buscarPorNombreUsuario(nombreUsuario);

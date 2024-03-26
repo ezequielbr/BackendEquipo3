@@ -24,8 +24,8 @@ public class CargadorInicial implements ApplicationRunner {
 //        BCryptPasswordEncoder cifrador = new BCryptPasswordEncoder();
 //        String clave = cifrador.encode("digital");
 //        System.out.println("Clave cifrada: "+cifrador);
-//        Usuario usuario1= new Usuario("EzequielB","hola","ezequielbravo00@gmail.com",UsuarioRol.ROLE_ADMIN,"Ezequiel","Bravo",42711202,false,new Domicilio("SA",2,"SA","SA"));
-//        usuarioRepository.save(usuario1);
+        Usuario usuario1= new Usuario("EzequielB","hola","ezequielbravo00@gmail.com",UsuarioRol.ROLE_ADMIN,"Ezequiel","Bravo",42711202,false,new Domicilio("SA",2,"SA","SA"));
+        usuarioRepository.save(usuario1);
 //        Usuario admin1= new Usuario("Vanesa","vanesa","vanesagarzon@digitalhouse.com",clave, UsuarioRol.ROLE_ADMIN);
 //        usuarioRepository.save(admin1);
 

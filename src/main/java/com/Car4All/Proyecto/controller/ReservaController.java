@@ -51,7 +51,7 @@ public class ReservaController {
         }
 
     }
-    @GetMapping("/buscar/{fechaInicio}")
+    @GetMapping("/buscar/fechaInicio/{fechaInicio}")
     public ResponseEntity<Optional<Reserva>> buscarPorFechaInicio(@PathVariable LocalDate fechaInicio) throws ResourceNotFoundException{
         logger.info("Llego la peticion de buscar un reserva con la fechaInicio: "+fechaInicio);
         Optional<Reserva> reservaBuscada= reservaService.buscarPorFechaInicio(fechaInicio);
@@ -63,7 +63,7 @@ public class ReservaController {
             throw new ResourceNotFoundException("No se pudo encontrar la reserva con la fechaInicio: "+fechaInicio+".");
         }
     }
-    @GetMapping("/buscar/{fechaFin}")
+    @GetMapping("/buscar/fechaFin/{fechaFin}")
     public ResponseEntity<Optional<Reserva>> buscarPorFechaFin(@PathVariable LocalDate fechaFin) throws ResourceNotFoundException{
         logger.info("Llego la peticion de buscar un reserva con la fechaFin: "+fechaFin);
         Optional<Reserva> reservaBuscada= reservaService.buscarPorFechaFin(fechaFin);

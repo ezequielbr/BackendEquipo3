@@ -51,6 +51,9 @@ public class Auto {
     @NonNull
     @Column
     private Boolean isReservado;
+    @NonNull
+    @Column
+    private String ubicacion;
 
     @ManyToMany(mappedBy = "autos", fetch = FetchType.LAZY)
     @JsonIgnore

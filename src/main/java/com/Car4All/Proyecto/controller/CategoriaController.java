@@ -51,7 +51,7 @@ public class CategoriaController {
             throw new ResourceNotFoundException("No se pudo encontrar la categoria con el id: "+id+".");
         }
     }
-    @GetMapping("/buscar/{categoriaNombre}")
+    @GetMapping("/buscar/categoriaNombre/{categoriaNombre}")
     public ResponseEntity<Optional<Categoria>> buscarPorNombreCategoria(@PathVariable String categoriaNombre) throws ResourceNotFoundException {
         logger.info("Llego la peticion de buscar una categoria con el nombre: "+categoriaNombre);
         Optional<Categoria> categoriaBuscada= categoriaService.buscarPorNombre(categoriaNombre);
