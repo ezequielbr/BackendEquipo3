@@ -29,16 +29,13 @@ public class Auto {
     private String marca;
     @NonNull
     @Column
-    private Integer cantidadDePlazas;
+    private Integer personas;
     @NonNull
     @Column
     private String tipoCombustible;
     @NonNull
     @Column
     private String tipoCaja;
-    @NonNull
-    @Column
-    private String tipoVehiculo;
     @NonNull
     @Column
     private String region;
@@ -51,9 +48,15 @@ public class Auto {
     @NonNull
     @Column
     private Boolean isReservado;
+//    @NonNull
+//    @Column
+//    private String ubicacion;
     @NonNull
     @Column
-    private String ubicacion;
+    private String imgUrl;
+//    @NonNull
+//    @Column
+//    private Set<String> imagenes= new HashSet<>();
 
     @ManyToMany(mappedBy = "autos", fetch = FetchType.LAZY)
     @JsonIgnore
@@ -66,8 +69,10 @@ public class Auto {
     private Set<Favoritos> favoritos= new HashSet<>();
     @OneToMany
     @JoinColumn(name = "valoracion_id",referencedColumnName = "id")
+    @JsonIgnore
     private Set<Valoracion> valoraciones= new HashSet<>();
     @OneToMany
     @JoinColumn(name = "reservas_id",referencedColumnName = "id")
+    @JsonIgnore
     private Set<Reserva> reservas= new HashSet<>();
 }
