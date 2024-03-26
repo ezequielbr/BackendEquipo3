@@ -57,6 +57,16 @@ public class Auto {
 //    @NonNull
 //    @Column
 //    private Set<String> imagenes= new HashSet<>();
+    @NonNull
+    @Column
+    private Integer puertas;
+    @NonNull
+    @Column
+    private Integer valijas;
+    @NonNull
+    @Column
+    private Double precio;
+
 
     @ManyToMany(mappedBy = "autos", fetch = FetchType.LAZY)
     @JsonIgnore
