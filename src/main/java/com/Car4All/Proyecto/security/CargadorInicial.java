@@ -4,8 +4,11 @@ import com.Car4All.Proyecto.entity.Auto;
 import com.Car4All.Proyecto.entity.Domicilio;
 import com.Car4All.Proyecto.entity.Usuario;
 import com.Car4All.Proyecto.entity.UsuarioRol;
+import com.Car4All.Proyecto.entity.Categoria;
 import com.Car4All.Proyecto.repository.AutoRepository;
+import com.Car4All.Proyecto.repository.CategoriaRepository;
 import com.Car4All.Proyecto.repository.UsuarioRepository;
+import com.Car4All.Proyecto.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -16,7 +19,10 @@ import java.time.LocalDate;
 
 @Component
 public class CargadorInicial implements ApplicationRunner {
-
+    @Autowired
+    private CategoriaService categoriaService;
+    @Autowired
+    private CategoriaRepository categoriaRepository;
     @Autowired
     private AutoRepository autoRepository;
     @Autowired
@@ -51,7 +57,17 @@ public class CargadorInicial implements ApplicationRunner {
         autoRepository.save(auto10);
         Auto auto11= new Auto("Grand Vitara 2.0 AWD","Suzuki",5,"GasOil","Manual","Argentina",false,"FGD987",false,"https://pngimg.com/uploads/pickup_truck/pickup_truck_PNG102880.png",5,4,50.00);
         autoRepository.save(auto11);
-
+        Categoria categoria1 = new Categoria("Auto");
+        categoriaRepository.save(categoria1);
+        Categoria categoria2 = new Categoria("Camioneta");
+        categoriaRepository.save(categoria2);
+//        categoriaService.agregarAutoACategoria(1L,1L);
+//        categoriaService.agregarAutoACategoria(1L,2L);
+//        categoriaService.agregarAutoACategoria(1L,3L);
+//        categoriaService.agregarAutoACategoria(1L,4L);
+//        categoriaService.agregarAutoACategoria(1L,5L);
+//        categoriaService.agregarAutoACategoria(2L,6L);
+//        categoriaService.agregarAutoACategoria(1L,7L);
 //        Usuario admin1= new Usuario("Vanesa","vanesa","vanesagarzon@digitalhouse.com",clave, UsuarioRol.ROLE_ADMIN);
 //        usuarioRepository.save(admin1);
 

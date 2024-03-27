@@ -22,9 +22,9 @@ public class FavoritosService {
     private AutoRepository autoRepository;
     @Autowired
     private UsuarioRepository usuarioRepository;
-    public Optional<Favoritos> agregarAutoAlFavoritos(Long usuarioId, Long autoId) {
-        Optional<Usuario> usuarioOptional = usuarioRepository.findById(usuarioId);
-        Optional<Auto> autoOptional = autoRepository.findById(autoId);
+    public Optional<Favoritos> agregarAutoAlFavoritos(Integer usuarioId, Integer autoId) {
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(Long.valueOf(usuarioId));
+        Optional<Auto> autoOptional = autoRepository.findById(Long.valueOf(autoId));
 
         if (usuarioOptional.isPresent() && autoOptional.isPresent()) {
             Usuario usuario = usuarioOptional.get();
@@ -41,9 +41,9 @@ public class FavoritosService {
         }
     }
 
-    public Optional<Favoritos> eliminarAutoDelFavoritos(Long usuarioId, Long autoId) {
-        Optional<Usuario> usuarioOptional = usuarioRepository.findById(usuarioId);
-        Optional<Auto> autoOptional = autoRepository.findById(autoId);
+    public Optional<Favoritos> eliminarAutoDelFavoritos(Integer usuarioId, Integer autoId) {
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(Long.valueOf(usuarioId));
+        Optional<Auto> autoOptional = autoRepository.findById(Long.valueOf(autoId));
 
         if (usuarioOptional.isPresent() && autoOptional.isPresent()) {
             Usuario usuario = usuarioOptional.get();

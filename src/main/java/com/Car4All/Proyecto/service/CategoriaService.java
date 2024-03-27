@@ -44,9 +44,9 @@ public class CategoriaService {
         logger.info("Se esta llevando a cabo el proceso de Listar Categorias");
         return categoriaRepository.findAll();
     }
-    public Optional<Categoria> agregarAutoACategoria(Long categoriaId, Long autoId) {
-        Optional<Categoria> categoriaOptional = categoriaRepository.findById(categoriaId);
-        Optional<Auto> autoOptional = autoRepository.findById(autoId);
+    public Optional<Categoria> agregarAutoACategoria(Integer categoriaId, Integer autoId) {
+        Optional<Categoria> categoriaOptional = categoriaRepository.findById(Long.valueOf(categoriaId));
+        Optional<Auto> autoOptional = autoRepository.findById(Long.valueOf(autoId));
 
         if (categoriaOptional.isPresent() && autoOptional.isPresent()) {
             Categoria categoria = categoriaOptional.get();
@@ -60,9 +60,9 @@ public class CategoriaService {
             return Optional.empty();
         }
     }
-    public Optional<Categoria> eliminarAutoDeCategoria(Long categoriaId, Long autoId) {
-        Optional<Categoria> categoriaOptional = categoriaRepository.findById(categoriaId);
-        Optional<Auto> autoOptional = autoRepository.findById(autoId);
+    public Optional<Categoria> eliminarAutoDeCategoria(Integer categoriaId, Integer autoId) {
+        Optional<Categoria> categoriaOptional = categoriaRepository.findById(Long.valueOf(categoriaId));
+        Optional<Auto> autoOptional = autoRepository.findById(Long.valueOf(autoId));
 
         if (categoriaOptional.isPresent() && autoOptional.isPresent()) {
             Categoria categoria = categoriaOptional.get();

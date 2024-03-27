@@ -1,6 +1,8 @@
 package com.Car4All.Proyecto.controller;
 
 import com.Car4All.Proyecto.entity.Favoritos;
+import com.Car4All.Proyecto.request.CategoriaAutoRequest;
+import com.Car4All.Proyecto.request.UsuarioAutoRequest;
 import com.Car4All.Proyecto.service.FavoritosService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,17 +23,17 @@ public class FavoritosController {
     private FavoritosService favoritosService;
 
     @PostMapping("/agregar-auto")
-    public ResponseEntity<String> agregarAutoAlFavoritos(@RequestParam Long usuarioId, @RequestParam Long autoId) {
-        logger.info("Llego la peticion de agregar un auto con el id: "+autoId+" a favoritos.");
-        Optional<Favoritos> favoritosOptional = favoritosService.agregarAutoAlFavoritos(usuarioId, autoId);
+    public ResponseEntity<String> agregarAutoAlFavoritos(@RequestBody UsuarioAutoRequest request) {
+        logger.info("Llego la peticion de agregar un auto con el id: "+request.getAutoId()+" a favoritos.");
+        Optional<Favoritos> favoritosOptional = favoritosService.agregarAutoAlFavoritos(request.getUsuarioId(), request.getAutoId());
         return favoritosOptional.map(favoritos -> ResponseEntity.ok("Auto agregado a favoritos"))
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario o auto no encontrado"));
     }
 
     @DeleteMapping("/eliminar-auto")
-    public ResponseEntity<String> eliminarAutoDelFavoritos(@RequestParam Long usuarioId, @RequestParam Long autoId) {
-        logger.info("Llego la peticion de eliminar un auto con el id: "+autoId+" a favoritos.");
-        Optional<Favoritos> favoritosOptional = favoritosService.eliminarAutoDelFavoritos(usuarioId, autoId);
+    public ResponseEntity<String> eliminarAutoDelFavoritos(@RequestBody UsuarioAutoRequest request) {
+        logger.info("Llego la peticion de eliminar un auto con el id: "+request.getAutoId()+" a favoritos.");
+        Optional<Favoritos> favoritosOptional = favoritosService.eliminarAutoDelFavoritos(request.getUsuarioId(), request.getAutoId());
         return favoritosOptional.map(favoritos -> ResponseEntity.ok("Auto eliminado del favoritos"))
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario o auto no encontrado"));
     }
