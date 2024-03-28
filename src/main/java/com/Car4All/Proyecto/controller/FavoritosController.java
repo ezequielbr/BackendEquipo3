@@ -1,9 +1,12 @@
 package com.Car4All.Proyecto.controller;
 
+import com.Car4All.Proyecto.entity.Auto;
 import com.Car4All.Proyecto.entity.Favoritos;
+import com.Car4All.Proyecto.entity.Usuario;
 import com.Car4All.Proyecto.request.CategoriaAutoRequest;
 import com.Car4All.Proyecto.request.UsuarioAutoRequest;
 import com.Car4All.Proyecto.service.FavoritosService;
+import com.Car4All.Proyecto.service.UsuarioService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
-import java.util.Optional;
-import java.util.ArrayList;
+
+import java.util.*;
 
 @Controller
 @RequestMapping("/favoritos")
@@ -23,16 +25,17 @@ public class FavoritosController {
     @Autowired
     private FavoritosService favoritosService;
 
-    @GetMapping("/favoritos")
-    public ResponseEntity<List<Favoritos>> listarFavoritos() {
+
+    @GetMapping("/usuario/{id}")
+    public ResponseEntity<Set<Auto>> listarAutosFavoritos(@PathVariable Integer id) {
         logger.info("Llego la petición de listar todos los favoritos");
-        List<Favoritos> favoritos = favoritosService.listarFavoritos();
-        if (!favoritos.isEmpty()) {
+        Set<Auto> autos = favoritosService.listarAutosFavoritos(id);
+        if (!autos.isEmpty()) {
             logger.info("Existen favoritos");
-            return ResponseEntity.ok(favoritos);
+            return ResponseEntity.ok(autos);
         } else {
             logger.info("No existen favoritos");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ArrayList<>());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new HashSet<>());
         }
     }
 

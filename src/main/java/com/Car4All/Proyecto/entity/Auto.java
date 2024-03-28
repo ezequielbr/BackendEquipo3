@@ -30,28 +30,13 @@ public class Auto {
     @NonNull
     @Column
     private Integer personas;
-
     @Column
     private String tipoCombustible;
     @NonNull
     @Column
     private String tipoCaja;
-
-    @Column
-    private String region;
-
-    @Column
-    private Boolean recomendado;
-
     @Column
     private String matricula;
-
-    @Column
-    private Boolean isReservado;
-//    @NonNull
-//    @Column
-//    private String ubicacion;
-  
     @Column
     private String imgUrl;
 //    @NonNull

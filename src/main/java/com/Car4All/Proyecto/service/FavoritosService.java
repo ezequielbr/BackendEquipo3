@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
 @Service
 public class FavoritosService {
     private static final Logger logger=  LogManager.getLogger(FavoritosService.class);
@@ -61,8 +63,10 @@ public class FavoritosService {
         }
     }
 
-    public List<Favoritos> listarFavoritos() {
+    public Set<Auto> listarAutosFavoritos(Integer id) {
         logger.info("Se esta llevando a cabo el proceso de Listar Favoritos");
-        return favoritosRepository.findAll();
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(id.longValue());
+        Set<Auto> autos = usuarioOptional.get().getFavoritos().getAutos();
+        return autos;
     }
 }
