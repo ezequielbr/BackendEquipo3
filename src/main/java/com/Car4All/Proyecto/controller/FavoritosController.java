@@ -11,8 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.List;
 import java.util.Optional;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/favoritos")
@@ -21,6 +22,19 @@ public class FavoritosController {
 
     @Autowired
     private FavoritosService favoritosService;
+
+    @GetMapping("/favoritos")
+    public ResponseEntity<List<Favoritos>> listarFavoritos() {
+        logger.info("Llego la petición de listar todos los favoritos");
+        List<Favoritos> favoritos = favoritosService.listarFavoritos();
+        if (!favoritos.isEmpty()) {
+            logger.info("Existen favoritos");
+            return ResponseEntity.ok(favoritos);
+        } else {
+            logger.info("No existen favoritos");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ArrayList<>());
+        }
+    }
 
     @PostMapping("/agregar-auto")
     public ResponseEntity<String> agregarAutoAlFavoritos(@RequestBody UsuarioAutoRequest request) {
