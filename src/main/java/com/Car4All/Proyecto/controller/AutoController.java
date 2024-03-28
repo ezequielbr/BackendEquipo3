@@ -1,5 +1,6 @@
 package com.Car4All.Proyecto.controller;
 
+import com.Car4All.Proyecto.dto.AutoDTO;
 import com.Car4All.Proyecto.entity.Auto;
 import com.Car4All.Proyecto.exception.ResourceNotFoundException;
 import com.Car4All.Proyecto.service.AutoService;
@@ -20,14 +21,15 @@ public class AutoController {
     @Autowired
     private AutoService autoService= new AutoService();
     @PostMapping
-    public ResponseEntity<Auto> registrarAuto(@RequestBody Auto auto){
+    public ResponseEntity<?> registrarAuto(@RequestBody AutoDTO auto){
         logger.info("Llego la peticion de registrar el auto: "+auto);
         return ResponseEntity.ok(autoService.guardarAuto(auto));
     }
-    @PutMapping
-    public ResponseEntity<String> actualizarAuto(@RequestBody Auto auto) throws ResourceNotFoundException {
+
+    @PutMapping("/actualizar")
+    public ResponseEntity<String> actualizarAuto(@RequestBody AutoDTO auto) throws ResourceNotFoundException {
         logger.info("Llego la peticion de actualizar el auto: "+auto);
-        Optional<Auto> autoBuscado= autoService.buscarPorId(auto.getId());
+        Optional<?> autoBuscado= autoService.buscarPorId(auto.getId());
         if(autoBuscado.isPresent()){
             logger.info("Se actualizo el auto: " + auto.getModelo()+" con el id: "+auto.getId()+".");
             autoService.actualizarAuto(auto);

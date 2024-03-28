@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 @Service
 public class FavoritosService {
@@ -60,4 +61,8 @@ public class FavoritosService {
         }
     }
 
+    public List<Favoritos> listarFavoritos() {
+        logger.info("Se esta llevando a cabo el proceso de Listar Favoritos");
+        return favoritosRepository.findAll();
     }
+}

@@ -22,7 +22,7 @@ public class Usuario /*implements UserDetails*/ {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
-    @NonNull
+
     private String nombreUsuario;
     @Column(nullable = false)
     @NonNull
@@ -31,21 +31,21 @@ public class Usuario /*implements UserDetails*/ {
     @NonNull
     private String email;
     @Column
-    @NonNull
+
     private UsuarioRol usuarioRol;
     @NonNull
     @Column
     private String nombre;
-    @NonNull
+
     @Column
     private String apellido;
-    @NonNull
+
     @Column
     private Integer dni;
-    @NonNull
+
     @Column
     private Boolean inicioSesion;
-    @NonNull
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "domicilio_id",referencedColumnName = "id")
     private Domicilio domicilio;

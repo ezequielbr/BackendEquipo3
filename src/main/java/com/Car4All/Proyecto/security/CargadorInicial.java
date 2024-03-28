@@ -1,10 +1,7 @@
 package com.Car4All.Proyecto.security;
 
-import com.Car4All.Proyecto.entity.Auto;
-import com.Car4All.Proyecto.entity.Domicilio;
-import com.Car4All.Proyecto.entity.Usuario;
-import com.Car4All.Proyecto.entity.UsuarioRol;
-import com.Car4All.Proyecto.entity.Categoria;
+import com.Car4All.Proyecto.dto.AutoDTO;
+import com.Car4All.Proyecto.entity.*;
 import com.Car4All.Proyecto.repository.AutoRepository;
 import com.Car4All.Proyecto.repository.CategoriaRepository;
 import com.Car4All.Proyecto.repository.UsuarioRepository;
@@ -14,11 +11,15 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+import com.Car4All.Proyecto.entity.Favoritos;
+import com.Car4All.Proyecto.repository.FavoritosRepository;
 
 import java.time.LocalDate;
 
 @Component
 public class CargadorInicial implements ApplicationRunner {
+    @Autowired
+    private FavoritosRepository favoritosRepository;
     @Autowired
     private CategoriaService categoriaService;
     @Autowired
@@ -33,9 +34,12 @@ public class CargadorInicial implements ApplicationRunner {
 //        BCryptPasswordEncoder cifrador = new BCryptPasswordEncoder();
 //        String clave = cifrador.encode("digital");
 //        System.out.println("Clave cifrada: "+cifrador);
-        Usuario usuario1= new Usuario("EzequielB","hola","ezequielbravo00@gmail.com",UsuarioRol.ROLE_ADMIN,"Ezequiel","Bravo",42711202,false,new Domicilio("SA",2,"SA","SA"));
+        Usuario usuario1= new Usuario("hola","ezequielbravo00@gmail.com","Ezequiel");
         usuarioRepository.save(usuario1);
-        Auto auto1= new Auto("Corolla 1.8 XEI Pack CVT","Toyota",5,"Nafta","Manual","Argentina",true,"SPX983",false,"https://autos.hamariweb.com/images/carimages/BBCQG0U.jpg",4,3,50.00);
+        Usuario usuario2= new Usuario("1234","nicolopezarq@gmail.com","Nicolas");
+        usuarioRepository.save(usuario2);
+
+  /*      AutoDTO auto1= new AutoDTO("Corolla 1.8 XEI Pack CVT","Toyota",5,"Manual","https://autos.hamariweb.com/images/carimages/BBCQG0U.jpg",4,3,50.00);
         autoRepository.save(auto1);
         Auto auto2= new Auto("Cronos","Fiat",5,"Nafta","Manual","Argentina",false,"GHR567",false,"https://garagem360.com.br/wp-content/uploads/2022/10/img-version-cronos-precision-13-at-2048x1306.png",4,2,55.00);
         autoRepository.save(auto2);
@@ -61,6 +65,10 @@ public class CargadorInicial implements ApplicationRunner {
         categoriaRepository.save(categoria1);
         Categoria categoria2 = new Categoria("Camioneta");
         categoriaRepository.save(categoria2);
+        Favoritos favoritos = new Favoritos();
+        favoritos.getAutos().add(auto1);
+        favoritosRepository.save(favoritos);
+            */
 //        categoriaService.agregarAutoACategoria(1L,1L);
 //        categoriaService.agregarAutoACategoria(1L,2L);
 //        categoriaService.agregarAutoACategoria(1L,3L);
