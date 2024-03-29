@@ -106,7 +106,7 @@ public class CategoriaController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Categoría o auto no encontrado"));
     }
     @GetMapping("/usuario/{id}")
-    public ResponseEntity<Set<Auto>> listarAutosFavoritos(@PathVariable Integer id) {
+    public ResponseEntity<Set<Auto>> listarAutosCategoria(@PathVariable Integer id) {
         logger.info("Llego la petición de listar todos los favoritos");
         Set<Auto> autos = categoriaService.listarAutosCategoria(id);
         if (!autos.isEmpty()) {
