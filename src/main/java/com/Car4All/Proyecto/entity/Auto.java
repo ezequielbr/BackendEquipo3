@@ -70,4 +70,8 @@ public class Auto {
     @JoinColumn(name = "reservas_id",referencedColumnName = "id")
     @JsonIgnore
     private Set<Reserva> reservas= new HashSet<>();
+    @OneToMany
+    @JoinColumn(name = "imagenes_id",referencedColumnName = "id")
+    @JsonIgnore
+    private Set<Imagen> imagenes= new HashSet<>();
 }
