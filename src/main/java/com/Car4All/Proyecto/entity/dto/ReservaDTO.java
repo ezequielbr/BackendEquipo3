@@ -1,4 +1,4 @@
-package com.Car4All.Proyecto.dto;
+package com.Car4All.Proyecto.entity.dto;
 
 import java.time.LocalDate;
 

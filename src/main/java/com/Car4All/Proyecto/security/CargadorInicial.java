@@ -1,6 +1,5 @@
 package com.Car4All.Proyecto.security;
 
-import com.Car4All.Proyecto.dto.AutoDTO;
 import com.Car4All.Proyecto.entity.*;
 import com.Car4All.Proyecto.repository.AutoRepository;
 import com.Car4All.Proyecto.repository.CategoriaRepository;
@@ -11,10 +10,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-import com.Car4All.Proyecto.entity.Favoritos;
 import com.Car4All.Proyecto.repository.FavoritosRepository;
-
-import java.time.LocalDate;
 
 @Component
 public class CargadorInicial implements ApplicationRunner {
