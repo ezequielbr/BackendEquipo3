@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
+@RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "domicilios")
@@ -28,10 +28,4 @@ public class Domicilio {
     @Column
     private String provincia;
 
-    public Domicilio(@NonNull String calle, @NonNull Integer numero, @NonNull String localidad, @NonNull String provincia) {
-        this.calle = calle;
-        this.numero = numero;
-        this.localidad = localidad;
-        this.provincia = provincia;
-    }
 }

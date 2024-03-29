@@ -1,5 +1,6 @@
 package com.Car4All.Proyecto.controller;
 
+import com.Car4All.Proyecto.entity.Auto;
 import com.Car4All.Proyecto.entity.Categoria;
 import com.Car4All.Proyecto.exception.ResourceNotFoundException;
 import com.Car4All.Proyecto.request.CategoriaAutoRequest;
@@ -12,8 +13,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/categoria")
@@ -101,5 +104,17 @@ public class CategoriaController {
         Optional<Categoria> categoriaOptional = categoriaService.eliminarAutoDeCategoria(request.getCategoriaId(), request.getAutoId());
         return categoriaOptional.map(categoria -> ResponseEntity.ok("Auto eliminado de la categoría"))
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Categoría o auto no encontrado"));
+    }
+    @GetMapping("/usuario/{id}")
+    public ResponseEntity<Set<Auto>> listarAutosFavoritos(@PathVariable Integer id) {
+        logger.info("Llego la petición de listar todos los favoritos");
+        Set<Auto> autos = categoriaService.listarAutosCategoria(id);
+        if (!autos.isEmpty()) {
+            logger.info("Existen favoritos");
+            return ResponseEntity.ok(autos);
+        } else {
+            logger.info("No existen favoritos");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new HashSet<>());
+        }
     }
 }

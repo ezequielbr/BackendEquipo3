@@ -2,8 +2,10 @@ package com.Car4All.Proyecto.service;
 
 import com.Car4All.Proyecto.entity.Auto;
 import com.Car4All.Proyecto.entity.Categoria;
+import com.Car4All.Proyecto.entity.Usuario;
 import com.Car4All.Proyecto.repository.AutoRepository;
 import com.Car4All.Proyecto.repository.CategoriaRepository;
+import com.Car4All.Proyecto.repository.UsuarioRepository;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
 @Service
 public class CategoriaService {
     private static final Logger logger=  LogManager.getLogger(CategoriaService.class);
@@ -19,6 +23,8 @@ public class CategoriaService {
     private CategoriaRepository categoriaRepository;
     @Autowired
     private AutoRepository autoRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     public Categoria guardarCategoria(Categoria categoria){
         logger.info("Se esta llevando a cabo el proceso de Guardar Categoria");
@@ -75,6 +81,12 @@ public class CategoriaService {
         } else {
             return Optional.empty();
         }
+    }
+    public Set<Auto> listarAutosCategoria(Integer id) {
+        logger.info("Se esta llevando a cabo el proceso de Listar Favoritos");
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(id.longValue());
+        Set<Auto> autos = usuarioOptional.get().getFavoritos().getAutos();
+        return autos;
     }
 }
 
