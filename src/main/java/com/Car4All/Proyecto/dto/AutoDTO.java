@@ -25,8 +25,10 @@ public class AutoDTO {
     private Integer valijas;
     @NonNull
     private Double precio;
+    @NonNull
+    private String categoria;
 
-    public AutoDTO(String modelo, String marca, Integer personas, String tipoCaja, Integer puertas, Integer valijas, Double precio) {
+    public AutoDTO(String modelo, String marca, Integer personas, String tipoCaja, Integer puertas, Integer valijas, Double precio, String categoria) {
         this.modelo = modelo;
         this.marca = marca;
         this.personas = personas;
@@ -34,6 +36,8 @@ public class AutoDTO {
         this.puertas = puertas;
         this.valijas = valijas;
         this.precio = precio;
+        this.categoria = categoria;
+
     }
 
 

@@ -51,8 +51,9 @@ public class Auto {
     @NonNull
     @Column
     private Double precio;
-
-
+    @NonNull
+    @Column
+    private String categoria;
     @ManyToMany(mappedBy = "autos", fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Carrito> carritos= new HashSet<>();

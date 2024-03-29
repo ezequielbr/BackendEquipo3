@@ -28,7 +28,7 @@ public class Categoria {
             name = "categoria_autos",
             joinColumns = @JoinColumn(name = "categoria_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "auto_id", referencedColumnName = "id"))
-    @JsonIgnore
+
     private Set<Auto> autos= new HashSet<>();
 
 }
