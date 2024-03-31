@@ -8,5 +8,4 @@ import java.util.Optional;
 
 @Repository
 public interface AutoRepository extends JpaRepository<Auto,Long> {
-    Optional<Auto> findByMatricula(String matricula);
 }

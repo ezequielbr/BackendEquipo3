@@ -52,18 +52,6 @@ public class AutoController {
         }
 
     }
-    @GetMapping("/buscar/matricula/{matricula}")
-    public ResponseEntity<Optional<Auto>> buscarPorMatricula(@PathVariable String matricula) throws ResourceNotFoundException{
-        logger.info("Llego la peticion de buscar un auto con la matricula: "+matricula);
-        Optional<Auto> autoBuscado= autoService.buscarPorMatricula(matricula);
-        if(autoBuscado.isPresent()){
-            logger.info("Se encontro el auto con la matricula: "+matricula);
-            return ResponseEntity.ok(autoBuscado);
-        }else{
-            logger.info("No se encontro el auto con la matricula: "+matricula);
-            throw new ResourceNotFoundException("No se pudo encontrar el auto con la matricula: "+matricula+".");
-        }
-    }
 
     @GetMapping
     public ResponseEntity<List<Auto>> listarAutos() throws ResourceNotFoundException{

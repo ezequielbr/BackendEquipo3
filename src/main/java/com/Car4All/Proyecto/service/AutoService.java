@@ -40,10 +40,6 @@ public class AutoService {
         logger.info("Se esta llevando a cabo el proceso de buscar Auto por Id");
         return autoRepository.findById(id);
     }
-    public Optional<Auto> buscarPorMatricula(String matricula){
-        logger.info("Se esta llevando a cabo el proceso de buscar Auto por matricula");
-        return autoRepository.findByMatricula(matricula);
-    }
     public List<Auto> listarAutos(){
         logger.info("Se esta llevando a cabo el proceso de Listar Autos");
         return autoRepository.findAll();
