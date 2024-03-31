@@ -80,5 +80,37 @@ public class CategoriaService {
             return Optional.empty();
         }
     }
+    public Optional<Categoria> agregarAutoACategoriaNombre(String categoriaNombre, Integer autoId) {
+        Optional<Categoria> categoriaOptional = categoriaRepository.findByNombre(categoriaNombre);
+        Optional<Auto> autoOptional = autoRepository.findById(Long.valueOf(autoId));
+
+        if (categoriaOptional.isPresent() && autoOptional.isPresent()) {
+            Categoria categoria = categoriaOptional.get();
+            Auto auto = autoOptional.get();
+
+            categoria.getAutos().add(auto);
+            categoriaRepository.save(categoria);
+
+            return Optional.of(categoria);
+        } else {
+            return Optional.empty();
+        }
+    }
+    public Optional<Categoria> eliminarAutoDeCategoriaNombre(String categoriaNombre, Integer autoId) {
+        Optional<Categoria> categoriaOptional = categoriaRepository.findByNombre(categoriaNombre);
+        Optional<Auto> autoOptional = autoRepository.findById(Long.valueOf(autoId));
+
+        if (categoriaOptional.isPresent() && autoOptional.isPresent()) {
+            Categoria categoria = categoriaOptional.get();
+            Auto auto = autoOptional.get();
+
+            categoria.getAutos().remove(auto);
+            categoriaRepository.save(categoria);
+
+            return Optional.of(categoria);
+        } else {
+            return Optional.empty();
+        }
+    }
 }
 

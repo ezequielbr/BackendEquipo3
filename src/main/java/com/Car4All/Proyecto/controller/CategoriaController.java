@@ -4,6 +4,7 @@ import com.Car4All.Proyecto.entity.Auto;
 import com.Car4All.Proyecto.entity.Categoria;
 import com.Car4All.Proyecto.exception.ResourceNotFoundException;
 import com.Car4All.Proyecto.request.CategoriaAutoRequest;
+import com.Car4All.Proyecto.request.CategoriaNombreAutoRequest;
 import com.Car4All.Proyecto.service.CategoriaService;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -102,6 +103,20 @@ public class CategoriaController {
     @DeleteMapping("/eliminar-auto")
     public ResponseEntity<String> eliminarAutoDeCategoria(@RequestBody CategoriaAutoRequest request) {
         Optional<Categoria> categoriaOptional = categoriaService.eliminarAutoDeCategoria(request.getCategoriaId(), request.getAutoId());
+        return categoriaOptional.map(categoria -> ResponseEntity.ok("Auto eliminado de la categoría"))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Categoría o auto no encontrado"));
+    }
+    @PostMapping("/agregar-auto/porNombreCategoria")
+    public ResponseEntity<String> agregarAutoACategoriaNombre(@RequestBody CategoriaNombreAutoRequest request) {
+        logger.info("Llego la peticion de agregar auto con el id: "+request.getAutoId()+" en la categoria con el nombre: "+request.getCategoriaNombre());
+        Optional<Categoria> categoriaOptional = categoriaService.agregarAutoACategoria(request.getCategoriaNombre(), request.getAutoId());
+        return categoriaOptional.map(categoria -> ResponseEntity.ok("Auto agregado a la categoría"))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Categoría o auto no encontrado"));
+    }
+
+    @DeleteMapping("/eliminar-auto/porNombreCategoria")
+    public ResponseEntity<String> eliminarAutoDeCategoriaNombre(@RequestBody CategoriaNombreAutoRequest request) {
+        Optional<Categoria> categoriaOptional = categoriaService.eliminarAutoDeCategoria(request.getCategoriaNombre(), request.getAutoId());
         return categoriaOptional.map(categoria -> ResponseEntity.ok("Auto eliminado de la categoría"))
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Categoría o auto no encontrado"));
     }
