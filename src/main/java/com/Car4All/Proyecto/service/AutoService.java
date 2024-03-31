@@ -1,10 +1,9 @@
 package com.Car4All.Proyecto.service;
 
-import com.Car4All.Proyecto.dto.AutoDTO;
+import com.Car4All.Proyecto.entity.dto.AutoDTO;
 import com.Car4All.Proyecto.entity.Auto;
 import com.Car4All.Proyecto.repository.AutoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.catalina.mapper.Mapper;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

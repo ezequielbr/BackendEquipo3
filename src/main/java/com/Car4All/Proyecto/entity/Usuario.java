@@ -31,7 +31,7 @@ public class Usuario /*implements UserDetails*/ {
     @NonNull
     private String email;
     @Column
-
+    @NonNull
     private UsuarioRol usuarioRol;
     @NonNull
     @Column

@@ -39,9 +39,6 @@ public class Auto {
     private String matricula;
     @Column
     private String imgUrl;
-//    @NonNull
-//    @Column
-//    private Set<String> imagenes= new HashSet<>();
     @NonNull
     @Column
     private Integer puertas;
@@ -51,9 +48,11 @@ public class Auto {
     @NonNull
     @Column
     private Double precio;
+
     @NonNull
     @Column
     private String categoria;
+
     @ManyToMany(mappedBy = "autos", fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Carrito> carritos= new HashSet<>();
@@ -71,4 +70,13 @@ public class Auto {
     @JoinColumn(name = "reservas_id",referencedColumnName = "id")
     @JsonIgnore
     private Set<Reserva> reservas= new HashSet<>();
+    @OneToMany
+    @JoinColumn(name = "imagenes_id",referencedColumnName = "id")
+    @JsonIgnore
+    private Set<Imagen> imagenes= new HashSet<>();
+    @OneToMany
+    @JoinColumn(name = "iconos_id",referencedColumnName = "id")
+    @JsonIgnore
+    private Set<Icono> iconos= new HashSet<>();
+
 }

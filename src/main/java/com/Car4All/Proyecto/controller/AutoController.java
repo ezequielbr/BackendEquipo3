@@ -1,6 +1,6 @@
 package com.Car4All.Proyecto.controller;
 
-import com.Car4All.Proyecto.dto.AutoDTO;
+import com.Car4All.Proyecto.entity.dto.AutoDTO;
 import com.Car4All.Proyecto.entity.Auto;
 import com.Car4All.Proyecto.exception.ResourceNotFoundException;
 import com.Car4All.Proyecto.service.AutoService;

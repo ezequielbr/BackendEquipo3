@@ -1,6 +1,5 @@
 package com.Car4All.Proyecto.security;
 
-import com.Car4All.Proyecto.dto.AutoDTO;
 import com.Car4All.Proyecto.entity.*;
 import com.Car4All.Proyecto.repository.AutoRepository;
 import com.Car4All.Proyecto.repository.CategoriaRepository;
@@ -11,10 +10,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-import com.Car4All.Proyecto.entity.Favoritos;
 import com.Car4All.Proyecto.repository.FavoritosRepository;
-
-import java.time.LocalDate;
 
 @Component
 public class CargadorInicial implements ApplicationRunner {
@@ -34,9 +30,9 @@ public class CargadorInicial implements ApplicationRunner {
 //        BCryptPasswordEncoder cifrador = new BCryptPasswordEncoder();
 //        String clave = cifrador.encode("digital");
 //        System.out.println("Clave cifrada: "+cifrador);
-        Usuario usuario1= new Usuario("hola","ezequielbravo00@gmail.com","Ezequiel");
+        Usuario usuario1= new Usuario("hola","ezequielbravo00@gmail.com",UsuarioRol.ROLE_USER,"Ezequiel");
         usuarioRepository.save(usuario1);
-        Usuario usuario2= new Usuario("1234","nicolopezarq@gmail.com","Nicolas");
+        Usuario usuario2= new Usuario("1234","nicolopezarq@gmail.com",UsuarioRol.ROLE_ADMIN,"Nicolas");
         usuarioRepository.save(usuario2);
 
   /*      AutoDTO auto1= new AutoDTO("Corolla 1.8 XEI Pack CVT","Toyota",5,"Manual","https://autos.hamariweb.com/images/carimages/BBCQG0U.jpg",4,3,50.00);

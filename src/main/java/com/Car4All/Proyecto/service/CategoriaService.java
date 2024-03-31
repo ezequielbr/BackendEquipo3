@@ -23,8 +23,6 @@ public class CategoriaService {
     private CategoriaRepository categoriaRepository;
     @Autowired
     private AutoRepository autoRepository;
-    @Autowired
-    private UsuarioRepository usuarioRepository;
 
     public Categoria guardarCategoria(Categoria categoria){
         logger.info("Se esta llevando a cabo el proceso de Guardar Categoria");
@@ -81,12 +79,6 @@ public class CategoriaService {
         } else {
             return Optional.empty();
         }
-    }
-    public Set<Auto> listarAutosCategoria(Integer id) {
-        logger.info("Se esta llevando a cabo el proceso de Listar Favoritos");
-        Optional<Usuario> usuarioOptional = usuarioRepository.findById(id.longValue());
-        Set<Auto> autos = usuarioOptional.get().getFavoritos().getAutos();
-        return autos;
     }
 }
 

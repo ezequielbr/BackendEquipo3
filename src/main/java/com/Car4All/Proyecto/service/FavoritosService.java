@@ -64,7 +64,7 @@ public class FavoritosService {
     }
 
     public Set<Auto> listarAutosFavoritos(Integer id) {
-        logger.info("Se esta llevando a cabo el proceso de Listar Favoritos");
+        logger.info("Se esta llevando a cabo el proceso de listar los autos Favoritos");
         Optional<Usuario> usuarioOptional = usuarioRepository.findById(id.longValue());
         Set<Auto> autos = usuarioOptional.get().getFavoritos().getAutos();
         return autos;
