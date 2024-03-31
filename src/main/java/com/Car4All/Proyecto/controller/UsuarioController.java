@@ -1,6 +1,7 @@
 package com.Car4All.Proyecto.controller;
 
 import com.Car4All.Proyecto.entity.Usuario;
+import com.Car4All.Proyecto.entity.dto.UsuarioDTO;
 import com.Car4All.Proyecto.exception.ResourceNotFoundException;
 import com.Car4All.Proyecto.service.UsuarioService;
 import org.apache.logging.log4j.LogManager;
@@ -20,12 +21,12 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
     @PostMapping
-    public ResponseEntity<Usuario> registrarUsuario(@RequestBody Usuario usuario){
+    public ResponseEntity<Usuario> registrarUsuario(@RequestBody UsuarioDTO usuario){
         logger.info("Llego la peticion de registrar el usuario: "+usuario);
         return ResponseEntity.ok(usuarioService.guardarUsuario(usuario));
     }
     @PutMapping
-    public ResponseEntity<String> actualizarUsuario(@RequestBody Usuario usuario) throws ResourceNotFoundException {
+    public ResponseEntity<String> actualizarUsuario(@RequestBody UsuarioDTO usuario) throws ResourceNotFoundException {
         logger.info("Llego la peticion de actualizar el usuario: "+usuario);
         Optional<Usuario> usuarioBuscado= usuarioService.buscarPorId(usuario.getId());
         if(usuarioBuscado.isPresent()){

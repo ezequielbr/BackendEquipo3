@@ -1,5 +1,8 @@
 package com.Car4All.Proyecto.service;
 
+
+import com.Car4All.Proyecto.entity.dto.UsuarioDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.core.userdetails.UserDetails;
 //import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,22 +20,27 @@ import java.util.Optional;
 @Service
 public class UsuarioService  /*implements UserDetailsService*/ {
     private static final Logger logger=  LogManager.getLogger(UsuarioService.class);
-
+    @Autowired
+    private ObjectMapper mapper;
     @Autowired
     private UsuarioRepository usuarioRepository;
 //    @Autowired
 //    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public Usuario guardarUsuario(Usuario usuario){
+    public Usuario guardarUsuario(UsuarioDTO usuario){
         logger.info("Se esta llevando a cabo el proceso de Guardar Usuario");
+        Usuario usuario1 = new Usuario();
+        usuario1 = mapper.convertValue(usuario, Usuario.class );
 //        usuario.setPassword(bCryptPasswordEncoder.encode(usuario.getPassword()));
 //        logger.info(usuario.getPassword());
-        return usuarioRepository.save(usuario);
+        return usuarioRepository.save(usuario1);
     }
-    public Usuario actualizarUsuario(Usuario usuario){
+    public Usuario actualizarUsuario(UsuarioDTO usuario){
         logger.info("Se esta llevando a cabo el proceso de Actualizar Usuario");
+        Usuario usuario1 = new Usuario();
+        usuario1 = mapper.convertValue(usuario, Usuario.class );
 //        usuario.setPassword(bCryptPasswordEncoder.encode(usuario.getPassword()));
-        return usuarioRepository.save(usuario);
+        return usuarioRepository.save(usuario1);
     }
     public void eliminarUsuario(Long id){
         logger.info("Se esta llevando a cabo el proceso de Eliminar Usuario");

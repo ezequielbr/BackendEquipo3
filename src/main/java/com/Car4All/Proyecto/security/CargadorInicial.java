@@ -30,10 +30,11 @@ public class CargadorInicial implements ApplicationRunner {
 //        BCryptPasswordEncoder cifrador = new BCryptPasswordEncoder();
 //        String clave = cifrador.encode("digital");
 //        System.out.println("Clave cifrada: "+cifrador);
-        Usuario usuario1= new Usuario("hola","ezequielbravo00@gmail.com","Ezequiel");
+        Usuario usuario1= new Usuario("EzequielB","hola","ezequielbravo00@gmail.com",UsuarioRol.ROLE_ADMIN,"Ezequiel","Bravo",42711202,false,new Domicilio("SA",2,"SA","SA"));
+//        Usuario usuario4= new Usuario("hola","ezequielbravo00@gmail.com","Ezequiel");
         usuarioRepository.save(usuario1);
-        Usuario usuario2= new Usuario("1234","nicolopezarq@gmail.com","Nicolas");
-        usuarioRepository.save(usuario2);
+//        Usuario usuario2= new Usuario("1234","nicolopezarq@gmail.com","Nicolas");
+//        usuarioRepository.save(usuario2);
 
   /*      AutoDTO auto1= new AutoDTO("Corolla 1.8 XEI Pack CVT","Toyota",5,"Manual","https://autos.hamariweb.com/images/carimages/BBCQG0U.jpg",4,3,50.00);
         autoRepository.save(auto1);

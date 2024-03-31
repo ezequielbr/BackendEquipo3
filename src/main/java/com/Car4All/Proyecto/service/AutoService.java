@@ -15,9 +15,9 @@ import java.util.Optional;
 @Service
 public class AutoService {
     private static final Logger logger=  LogManager.getLogger(AutoService.class);
-   @Autowired
-    ObjectMapper mapper;
 
+    @Autowired
+    private ObjectMapper mapper;
 
     @Autowired
     private AutoRepository autoRepository;
