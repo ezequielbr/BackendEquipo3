@@ -2,8 +2,10 @@ package com.Car4All.Proyecto.service;
 
 import com.Car4All.Proyecto.entity.Auto;
 import com.Car4All.Proyecto.entity.Reserva;
+import com.Car4All.Proyecto.entity.dto.ReservaDTO;
 import com.Car4All.Proyecto.exception.BadRequestException;
 import com.Car4All.Proyecto.repository.ReservaRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,27 +19,30 @@ import java.util.Set;
 @Service
 public class ReservaService {
     private static final Logger logger=  LogManager.getLogger(ReservaService.class);
-
+    @Autowired
+    private ObjectMapper mapper;
     @Autowired
     private ReservaRepository reservaRepository;
-
-
-    public Reserva guardarReserva(Reserva reserva) throws BadRequestException {
+    @Autowired
+    private AutoService autoService;
+    public Reserva guardarReserva(ReservaDTO reserva) throws BadRequestException {
         logger.info("Se esta llevando a cabo el proceso de Guardar Reserva");
-        Auto auto = reserva.getAuto();
-        Set<Reserva> reservas= auto.getReservas();
-        for(Reserva reserva1 : reservas){
-            if (reserva.getFechaInicio().isEqual(reserva1.getFechaInicio()) ||
-                    reserva.getFechaFin().isEqual(reserva1.getFechaFin()) ||
-                    (reserva.getFechaInicio().isBefore(reserva1.getFechaFin()) && reserva.getFechaFin().isAfter(reserva1.getFechaInicio()))) {
+        Reserva reserva1 = mapper.convertValue(reserva, Reserva.class);
+        Optional<Auto> auto = autoService.buscarPorId(reserva.getAutoId());
+        Set<Reserva> reservas= auto.get().getReservas();
+        for(Reserva reserva2 : reservas){
+            if (reserva.getFechaInicio().isEqual(reserva2.getFechaInicio()) ||
+                    reserva.getFechaFin().isEqual(reserva2.getFechaFin()) ||
+                    (reserva.getFechaInicio().isBefore(reserva2.getFechaFin()) && reserva.getFechaFin().isAfter(reserva2.getFechaInicio()))) {
                 throw new BadRequestException("No se puede realizar la reserva en fechas donde el auto se encuentra reservado");
             }
         }
-        return reservaRepository.save(reserva);
+        return reservaRepository.save(reserva1);
     }
-    public Reserva actualizarReserva(Reserva reserva){
+    public Reserva actualizarReserva(ReservaDTO reserva){
         logger.info("Se esta llevando a cabo el proceso de Actualizar Reserva");
-        return reservaRepository.save(reserva);
+        Reserva reserva1 = mapper.convertValue(reserva, Reserva.class);
+        return reservaRepository.save(reserva1);
     }
     public void eliminarReserva(Long id){
         logger.info("Se esta llevando a cabo el proceso de Eliminar Reserva");

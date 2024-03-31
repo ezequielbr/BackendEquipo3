@@ -17,7 +17,6 @@ import java.util.Set;
 @Entity
 @Table(name="autos")
 public class Auto {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,14 +29,11 @@ public class Auto {
     @NonNull
     @Column
     private Integer personas;
-    @Column
-    private String tipoCombustible;
     @NonNull
     @Column
     private String tipoCaja;
     @Column
-    private String matricula;
-    @Column
+    @NonNull
     private String imgUrl;
     @NonNull
     @Column
@@ -73,5 +69,4 @@ public class Auto {
     @JoinColumn(name = "iconos_id",referencedColumnName = "id")
     @JsonIgnore
     private Set<Icono> iconos= new HashSet<>();
-
 }

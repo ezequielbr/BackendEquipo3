@@ -28,7 +28,7 @@ public class UsuarioController {
     @PutMapping
     public ResponseEntity<String> actualizarUsuario(@RequestBody UsuarioDTO usuario) throws ResourceNotFoundException {
         logger.info("Llego la peticion de actualizar el usuario: "+usuario);
-        Optional<Usuario> usuarioBuscado= usuarioService.buscarPorId(usuario.getId());
+        Optional<?> usuarioBuscado= usuarioService.buscarPorId(usuario.getId());
         if(usuarioBuscado.isPresent()){
             logger.info("Se actualizo el usuario: " + usuario);
             usuarioService.actualizarUsuario(usuario);

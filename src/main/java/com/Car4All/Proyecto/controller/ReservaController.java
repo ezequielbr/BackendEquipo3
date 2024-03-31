@@ -1,5 +1,6 @@
 package com.Car4All.Proyecto.controller;
 
+import com.Car4All.Proyecto.entity.dto.ReservaDTO;
 import com.Car4All.Proyecto.exception.BadRequestException;
 import com.Car4All.Proyecto.exception.ResourceNotFoundException;
 import com.Car4All.Proyecto.entity.Reserva;
@@ -21,12 +22,12 @@ public class ReservaController {
     @Autowired
     private ReservaService reservaService= new ReservaService();
     @PostMapping
-    public ResponseEntity<Reserva> registrarReserva(@RequestBody Reserva reserva) throws BadRequestException {
+    public ResponseEntity<Reserva> registrarReserva(@RequestBody ReservaDTO reserva) throws BadRequestException {
         logger.info("Llego la peticion de registrar la reserva: "+reserva);
         return ResponseEntity.ok(reservaService.guardarReserva(reserva));
     }
     @PutMapping
-    public ResponseEntity<String> actualizarReserva(@RequestBody Reserva reserva) throws ResourceNotFoundException {
+    public ResponseEntity<String> actualizarReserva(@RequestBody ReservaDTO reserva) throws ResourceNotFoundException {
         logger.info("Llego la peticion de actualizar la reserva: "+reserva);
         Optional<Reserva> reservaBuscada= reservaService.buscarPorId(reserva.getId());
         if(reservaBuscada.isPresent()){

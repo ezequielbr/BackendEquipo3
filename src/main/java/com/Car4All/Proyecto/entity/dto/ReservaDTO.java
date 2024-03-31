@@ -1,34 +1,22 @@
 package com.Car4All.Proyecto.entity.dto;
 
+import lombok.*;
+
 import java.time.LocalDate;
-
+@Setter
+@Getter
+@RequiredArgsConstructor
+@NoArgsConstructor
 public class ReservaDTO {
-
-    private Long reservaId;
+    private Long id;
+    @NonNull
     private Long usuarioId;
+    @NonNull
     private Long autoId;
+    @NonNull
     private LocalDate fechaInicio;
+    @NonNull
     private LocalDate fechaFin;
 
-    public ReservaDTO() {
-    }
 
-    public ReservaDTO(Long reservaId, Long usuarioId, Long autoId, LocalDate fechaInicio, LocalDate fechaFin) {
-        this.reservaId = reservaId;
-        this.usuarioId = usuarioId;
-        this.autoId = autoId;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
-    }
-
-    @Override
-    public String toString() {
-        return "ReservaDTO{" +
-                "reservaId=" + reservaId +
-                ", usuarioId=" + usuarioId +
-                ", autoId=" + autoId +
-                ", fechaInicio=" + fechaInicio +
-                ", fechaFin=" + fechaFin +
-                '}';
-    }
 }

@@ -23,14 +23,12 @@ public class AutoService {
     private AutoRepository autoRepository;
 
     public Auto guardarAuto(AutoDTO auto){
-        Auto auto1 = new Auto();
-        auto1 = mapper.convertValue(auto, Auto.class );
+        Auto auto1 = mapper.convertValue(auto, Auto.class );
         logger.info("Se esta llevando a cabo el proceso de Guardar Auto");
         return autoRepository.save(auto1);
     }
     public Auto actualizarAuto(AutoDTO auto){
-        Auto auto1 = new Auto();
-        auto1 = mapper.convertValue(auto, Auto.class );
+        Auto auto1 = mapper.convertValue(auto, Auto.class );
         logger.info("Se esta llevando a cabo el proceso de Actualizar Auto");
         return autoRepository.save(auto1);
     }

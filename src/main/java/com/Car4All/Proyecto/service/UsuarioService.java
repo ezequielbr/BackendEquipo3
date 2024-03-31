@@ -29,16 +29,14 @@ public class UsuarioService  /*implements UserDetailsService*/ {
 
     public Usuario guardarUsuario(UsuarioDTO usuario){
         logger.info("Se esta llevando a cabo el proceso de Guardar Usuario");
-        Usuario usuario1 = new Usuario();
-        usuario1 = mapper.convertValue(usuario, Usuario.class );
+        Usuario usuario1 = mapper.convertValue(usuario, Usuario.class );
 //        usuario.setPassword(bCryptPasswordEncoder.encode(usuario.getPassword()));
 //        logger.info(usuario.getPassword());
         return usuarioRepository.save(usuario1);
     }
     public Usuario actualizarUsuario(UsuarioDTO usuario){
         logger.info("Se esta llevando a cabo el proceso de Actualizar Usuario");
-        Usuario usuario1 = new Usuario();
-        usuario1 = mapper.convertValue(usuario, Usuario.class );
+        Usuario usuario1 = mapper.convertValue(usuario, Usuario.class );
 //        usuario.setPassword(bCryptPasswordEncoder.encode(usuario.getPassword()));
         return usuarioRepository.save(usuario1);
     }

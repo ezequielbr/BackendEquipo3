@@ -46,9 +46,9 @@ public class Usuario /*implements UserDetails*/ {
     @NonNull
     private Boolean inicioSesion;
     @NonNull
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "domicilio_id",referencedColumnName = "id")
-    private Domicilio domicilio;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "domicilio_id",referencedColumnName = "id")
+//    private Domicilio domicilio;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "carrito_id",referencedColumnName = "id")
     @JsonIgnore
