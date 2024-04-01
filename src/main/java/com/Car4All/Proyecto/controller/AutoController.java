@@ -22,7 +22,7 @@ public class AutoController {
     private AutoService autoService= new AutoService();
     @PostMapping
     public ResponseEntity<?> registrarAuto(@RequestBody AutoDTO auto){
-        logger.info("Llego la peticion de registrar el auto: "+auto);
+        logger.info("Llego la peticion de registrar el auto: "+auto.getModelo());
         return ResponseEntity.ok(autoService.guardarAuto(auto));
     }
 
