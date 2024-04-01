@@ -30,12 +30,11 @@ public class CargadorInicial implements ApplicationRunner {
 //        BCryptPasswordEncoder cifrador = new BCryptPasswordEncoder();
 //        String clave = cifrador.encode("digital");
 //        System.out.println("Clave cifrada: "+cifrador);
-//        Usuario usuario1= new Usuario("EzequielB","1234","ezequielbravo00@gmail.com",UsuarioRol.ROLE_ADMIN,"Ezequiel","Bravo",42711202,false);
-//        Usuario usuario2= new Usuario("Nico","1234","nicoooo@gmail.com",UsuarioRol.ROLE_ADMIN,"Nicolas","Lopez",45272457,false);
-//        Usuario usuario4= new Usuario("hola","ezequielbravo00@gmail.com","Ezequiel");
-//        usuarioRepository.save(usuario1);
+//          Usuario usuario1= new Usuario("EzequielB","1234","ezequielbravo00@gmail.com",UsuarioRol.ROLE_ADMIN,"Ezequiel","Bravo",42711202,false);
+//          Usuario usuario2= new Usuario("Nico","1234","nicoooo@gmail.com",UsuarioRol.ROLE_ADMIN,"Nicolas","Lopez",45272457,false);
+//          usuarioRepository.save(usuario1);
+//          usuarioRepository.save(usuario2);
 //        Usuario usuario2= new Usuario("1234","nicolopezarq@gmail.com","Nicolas");
-//        usuarioRepository.save(usuario2);
 //        Usuario usuario1= new Usuario("1234","ezequielbravo00@gmail.com",UsuarioRol.ROLE_ADMIN,"Ezequiel");
 //        usuarioRepository.save(usuario1);
 //        Usuario usuario2= new Usuario("1234","nicolopezarq@gmail.com",UsuarioRol.ROLE_ADMIN,"Nicolas");
@@ -66,9 +65,6 @@ public class CargadorInicial implements ApplicationRunner {
 //        categoriaRepository.save(categoria1);
 //        Categoria categoria2 = new Categoria("Camioneta");
 //        categoriaRepository.save(categoria2);
-//        Favoritos favoritos = new Favoritos();
-//        favoritos.getAutos().add(auto1);
-//        favoritosRepository.save(favoritos);
 
 //        categoriaService.agregarAutoACategoria(1,1);
 //        categoriaService.agregarAutoACategoria(1,2);
@@ -77,8 +73,6 @@ public class CargadorInicial implements ApplicationRunner {
 //        categoriaService.agregarAutoACategoria(1,5);
 //        categoriaService.agregarAutoACategoria(2,6);
 //        categoriaService.agregarAutoACategoria(1,7);
-//        Usuario admin1= new Usuario("Vanesa","vanesa","vanesagarzon@digitalhouse.com",clave, UsuarioRol.ROLE_ADMIN);
-//        usuarioRepository.save(admin1);
 
 
     }
