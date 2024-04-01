@@ -48,7 +48,6 @@ public class Auto {
     @JsonIgnore
     private Set<Carrito> carritos= new HashSet<>();
     @ManyToMany(mappedBy ="autos", fetch = FetchType.LAZY)
-    @JsonIgnore
     private Set<Categoria> categorias= new HashSet<>();
     @ManyToMany(mappedBy ="autos", fetch = FetchType.LAZY)
     @JsonIgnore

@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CategoriaNombreAutoRequest {
-    private Integer categoriaNombre;
+    private String categoriaNombre;
     private Integer autoId;
 }
