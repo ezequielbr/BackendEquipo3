@@ -62,6 +62,12 @@ public class Usuario /*implements UserDetails*/ {
     @JsonIgnore
     private Set<Valoracion> valoraciones= new HashSet<>();
 
+    public Usuario(@NonNull String password, @NonNull String email, @NonNull UsuarioRol usuarioRol, @NonNull String nombre) {
+        this.password = password;
+        this.email = email;
+        this.usuarioRol = usuarioRol;
+        this.nombre = nombre;
+    }
 
 //    private void init() {
 //        carrito = new Carrito();
