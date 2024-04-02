@@ -1,4 +1,4 @@
-package com.Car4All.Proyecto.security;
+package com.Car4All.Proyecto.configuration;
 
 
 import com.Car4All.Proyecto.entity.Categoria;

@@ -1,14 +1,18 @@
 package com.Car4All.Proyecto.controller;
 
 import com.Car4All.Proyecto.entity.Categoria;
+import com.Car4All.Proyecto.entity.Favoritos;
 import com.Car4All.Proyecto.entity.dto.AutoDTO;
 import com.Car4All.Proyecto.entity.Auto;
 import com.Car4All.Proyecto.exception.ResourceNotFoundException;
+import com.Car4All.Proyecto.request.ImgUrlAutoRequest;
+import com.Car4All.Proyecto.request.UsuarioAutoRequest;
 import com.Car4All.Proyecto.service.AutoService;
 import com.Car4All.Proyecto.service.CategoriaService;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +29,7 @@ public class AutoController {
     @Autowired
     private CategoriaService categoriaService;
     @PostMapping
-    public ResponseEntity<?> registrarAuto(@RequestBody AutoDTO auto){
+    public ResponseEntity<?> registrarAuto(@RequestBody AutoDTO auto) throws ResourceNotFoundException{
         logger.info("Llego la peticion de registrar el auto: "+auto.getModelo());
         return ResponseEntity.ok(autoService.guardarAuto(auto));
     }
@@ -44,7 +48,7 @@ public class AutoController {
         }
     }
     @GetMapping("/buscar/{id}")
-    public ResponseEntity<Optional<Auto>> buscarPorId(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<Optional<Auto>> buscarPorId(@PathVariable Integer id) throws ResourceNotFoundException {
         logger.info("Llego la peticion de buscar un auto con el id: "+id);
         Optional<Auto> autoBuscado= autoService.buscarPorId(id);
         if(autoBuscado.isPresent()){
@@ -68,7 +72,7 @@ public class AutoController {
         }
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarAuto(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<String> eliminarAuto(@PathVariable Integer id) throws ResourceNotFoundException {
         logger.info("Llego la peticion de eliminar el auto con el id: "+id);
         Optional<Auto> autoBuscado = autoService.buscarPorId(id);
         if(autoBuscado.isPresent()){
@@ -79,4 +83,22 @@ public class AutoController {
             logger.info("No se elimino el auto con el id: "+id);
         throw  new ResourceNotFoundException("No se encontro auto a eliminar.");
     }
+    @PostMapping("/agregar-imagen/porUrl")
+    public ResponseEntity<String> agregarImagenAlAuto(@RequestBody ImgUrlAutoRequest request) {
+        logger.info("Llego la peticion de agregar una imagen con el url: "+request.getUrl()+" al auto con el id: "+request.getAutoId()+".");
+        Optional<Auto> autoOptional = autoService.agregarImagenUrlAlAuto(request.getUrl(), request.getAutoId());
+        return autoOptional.map(auto -> ResponseEntity.ok("Imagen agregada al auto"))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Auto o imagen no encontrada"));
+    }
+    @DeleteMapping("/eliminar-imagen/porUrl")
+    public ResponseEntity<String> eliminarImagenAlAuto(@RequestBody ImgUrlAutoRequest request) {
+        logger.info("Llegó la petición de eliminar una imagen con la URL: " + request.getUrl() + " al auto con el ID: " + request.getAutoId());
+        Optional<Auto> autoOptional = autoService.eliminarImagenUrlAlAuto(request.getUrl(), request.getAutoId());
+        if (autoOptional.isPresent()) {
+            return ResponseEntity.ok("Imagen eliminada del auto");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Auto o imagen no encontrada");
+        }
+    }
+
 }

@@ -22,23 +22,23 @@ public class ReservaController {
     @Autowired
     private ReservaService reservaService= new ReservaService();
     @PostMapping
-    public ResponseEntity<Reserva> registrarReserva(@RequestBody ReservaDTO reserva) throws BadRequestException {
+    public ResponseEntity<Reserva> registrarReserva(@RequestBody ReservaDTO reserva) throws BadRequestException, ResourceNotFoundException {
         logger.info("Llego la peticion de registrar la reserva: "+reserva);
         return ResponseEntity.ok(reservaService.guardarReserva(reserva));
     }
-    @PutMapping
-    public ResponseEntity<String> actualizarReserva(@RequestBody ReservaDTO reserva) throws ResourceNotFoundException {
-        logger.info("Llego la peticion de actualizar la reserva: "+reserva);
-        Optional<Reserva> reservaBuscada= reservaService.buscarPorId(reserva.getId());
-        if(reservaBuscada.isPresent()){
-            logger.info("Se actualizo la reserva: " + reserva);
-            reservaService.actualizarReserva(reserva);
-            return ResponseEntity.ok("Reserva con el id: "+reserva.getId()+" actualizado con exito.");
-        }else{
-            logger.info("No se actualizo la reserva: " + reserva);
-            throw new ResourceNotFoundException("No se pudo encontrar la reserva con la id: "+reserva.getId()+".");
-        }
-    }
+//    @PutMapping
+//    public ResponseEntity<String> actualizarReserva(@RequestBody ReservaDTO reserva) throws ResourceNotFoundException {
+//        logger.info("Llego la peticion de actualizar la reserva: "+reserva);
+//        Optional<Reserva> reservaBuscada= reservaService.buscarPorId(reserva.getId());
+//        if(reservaBuscada.isPresent()){
+//            logger.info("Se actualizo la reserva: " + reserva);
+//            reservaService.actualizarReserva(reserva);
+//            return ResponseEntity.ok("Reserva con el id: "+reserva.getId()+" actualizado con exito.");
+//        }else{
+//            logger.info("No se actualizo la reserva: " + reserva);
+//            throw new ResourceNotFoundException("No se pudo encontrar la reserva con la id: "+reserva.getId()+".");
+//        }
+//    }
     @GetMapping("/buscar/{id}")
     public ResponseEntity<Optional<Reserva>> buscarPorId(@PathVariable Long id) throws ResourceNotFoundException {
         logger.info("Llego la peticion de buscar un reserva con la id: "+id);

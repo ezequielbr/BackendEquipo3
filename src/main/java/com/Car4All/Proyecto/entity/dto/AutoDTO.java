@@ -1,8 +1,6 @@
 package com.Car4All.Proyecto.entity.dto;
 
-import com.Car4All.Proyecto.entity.Auto;
-import com.Car4All.Proyecto.entity.Carrito;
-import com.Car4All.Proyecto.entity.Categoria;
+import com.Car4All.Proyecto.entity.*;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -16,7 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class AutoDTO {
 
-    private Long id;
+    private Integer id;
     @NonNull
     private String modelo;
     @NonNull
@@ -33,8 +31,9 @@ public class AutoDTO {
     private Integer valijas;
     @NonNull
     private Double precio;
-
     private Categoria categoria;
+    private Set<Imagen> imagenes= new HashSet<>();
+    private Set<Icono> iconos= new HashSet<>();
 
 
 

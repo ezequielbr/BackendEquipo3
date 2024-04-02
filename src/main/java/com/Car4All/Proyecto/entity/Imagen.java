@@ -1,7 +1,11 @@
 package com.Car4All.Proyecto.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.*;
+
+import java.net.URL;
 
 @Setter
 @Getter
@@ -15,8 +19,10 @@ public class Imagen {
     private Long id;
     @Column
     @NonNull
+    @Size(max = 1000)
     private String urlImg;
     @ManyToOne
     @JoinColumn(name ="auto_id", referencedColumnName = "id")
+    @JsonIgnore
     private Auto auto;
 }

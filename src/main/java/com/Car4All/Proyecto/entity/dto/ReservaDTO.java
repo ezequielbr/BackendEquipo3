@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class ReservaDTO {
     private Long id;
-    @NonNull
+
     private Long usuarioId;
     @NonNull
     private Long autoId;

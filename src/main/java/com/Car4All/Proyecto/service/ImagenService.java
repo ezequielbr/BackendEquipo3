@@ -1,6 +1,9 @@
 package com.Car4All.Proyecto.service;
 
+import com.Car4All.Proyecto.entity.Auto;
+import com.Car4All.Proyecto.entity.Favoritos;
 import com.Car4All.Proyecto.entity.Imagen;
+import com.Car4All.Proyecto.entity.Usuario;
 import com.Car4All.Proyecto.repository.ImagenRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,5 +39,8 @@ public class ImagenService {
         logger.info("Se esta llevando a cabo el proceso de Listar Imagenes");
         return imagenRepository.findAll();
     }
-   
+    public Optional<Imagen> buscarPorUrl(String url){
+        logger.info("Se esta llevando a cabo el proceso de buscar imagen por url");
+        return imagenRepository.findByUrlImg(url);
+    }
 }
