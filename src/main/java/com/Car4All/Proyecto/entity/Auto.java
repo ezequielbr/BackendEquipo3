@@ -66,7 +66,6 @@ public class Auto {
     private Set<Reserva> reservas= new HashSet<>();
     @OneToMany
     @JoinColumn(name = "imagenes_id",referencedColumnName = "id")
-
     private Set<Imagen> imagenes= new HashSet<>();
     @OneToMany
     @JoinColumn(name = "iconos_id",referencedColumnName = "id")

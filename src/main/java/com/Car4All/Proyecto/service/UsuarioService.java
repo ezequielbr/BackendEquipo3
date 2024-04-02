@@ -60,6 +60,26 @@ public class UsuarioService  /*implements UserDetailsService*/ {
         logger.info("Se esta llevando a cabo el proceso de buscar Usuario por Email");
         return usuarioRepository.findByNombreUsuario(nombreUsuario);
     }
+    public UsuarioDTO convertirAUsuarioDTO(Usuario usuario) {
+        UsuarioDTO usuarioDTO = new UsuarioDTO();
+        usuarioDTO.setId(usuario.getId());
+        usuarioDTO.setPassword(usuario.getPassword());
+        usuarioDTO.setEmail(usuario.getEmail());
+        usuarioDTO.setNombre(usuario.getNombre());
+        usuarioDTO.setUsuarioRol(usuario.getUsuarioRol());
+        return usuarioDTO;
+    }
+
+    public Usuario convertirAUsuario(UsuarioDTO usuarioDTO) {
+        Usuario usuario = new Usuario();
+        usuario.setId(usuarioDTO.getId());
+        usuario.setNombreUsuario(usuarioDTO.getNombre());
+        usuario.setPassword(usuarioDTO.getPassword());
+        usuario.setEmail(usuarioDTO.getEmail());
+        usuario.setUsuarioRol(usuarioDTO.getUsuarioRol());
+        usuario.setNombre(usuarioDTO.getNombre());
+        return usuario;
+    }
 //    @Override
 //    public UserDetails loadUserByUsername(String nombreUsuario) throws UsernameNotFoundException {
 //        Optional<Usuario> usuarioOptional = usuarioRepository.findByNombreUsuario(nombreUsuario);

@@ -2,6 +2,7 @@ package com.Car4All.Proyecto.service;
 
 import com.Car4All.Proyecto.entity.Favoritos;
 import com.Car4All.Proyecto.entity.Imagen;
+import com.Car4All.Proyecto.entity.Reserva;
 import com.Car4All.Proyecto.entity.dto.AutoDTO;
 import com.Car4All.Proyecto.entity.Auto;
 import com.Car4All.Proyecto.exception.ResourceNotFoundException;
@@ -14,10 +15,7 @@ import org.springframework.stereotype.Service;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class AutoService {
@@ -42,18 +40,23 @@ public class AutoService {
 
     private Auto actualizarImagenesAuto(AutoDTO autoDTO) throws ResourceNotFoundException {
         Auto auto = mapper.convertValue(autoDTO, Auto.class);
+
+        Set<Imagen> imagenesActualizadas = new HashSet<>();
         if (!autoDTO.getImagenes().isEmpty()) {
             for (Imagen imagen : autoDTO.getImagenes()) {
                 Optional<Auto> autoOptional = agregarImagenUrlAlAuto(imagen.getUrlImg(), autoDTO.getId());
                 if (autoOptional.isPresent()) {
-                    auto.setImagenes(autoOptional.get().getImagenes());
+                    imagenesActualizadas.addAll(autoOptional.get().getImagenes());
                 } else {
-                    throw new ResourceNotFoundException("La imagen con el url: "+imagen.getUrlImg()+"no existe en la base de datos.");
+                    throw new ResourceNotFoundException("La imagen con el url: " + imagen.getUrlImg() + " no existe en la base de datos.");
                 }
             }
         }
+        auto.setImagenes(imagenesActualizadas);
+
         return autoRepository.save(auto);
     }
+
 
 
     public void eliminarAuto(Integer id){
@@ -121,5 +124,39 @@ public class AutoService {
         } else {
             return Optional.empty();
         }
+    }
+
+    public AutoDTO convertirAAutoDTO(Auto auto) {
+        AutoDTO autoDTO = new AutoDTO();
+        autoDTO.setId(Math.toIntExact(auto.getId()));
+        autoDTO.setModelo(auto.getModelo());
+        autoDTO.setMarca(auto.getMarca());
+        autoDTO.setPersonas(auto.getPersonas());
+        autoDTO.setTipoCaja(auto.getTipoCaja());
+        autoDTO.setImgUrl(auto.getImgUrl());
+        autoDTO.setPuertas(auto.getPuertas());
+        autoDTO.setValijas(auto.getValijas());
+        autoDTO.setPrecio(auto.getPrecio());
+        autoDTO.setCategoria(auto.getCategoria());
+        autoDTO.setImagenes(auto.getImagenes());
+        autoDTO.setIconos(auto.getIconos());
+        return autoDTO;
+    }
+
+    public Auto convertirAAuto(AutoDTO autoDTO) {
+        Auto auto = new Auto();
+        auto.setId(Long.valueOf(autoDTO.getId()));
+        auto.setModelo(autoDTO.getModelo());
+        auto.setMarca(autoDTO.getMarca());
+        auto.setPersonas(autoDTO.getPersonas());
+        auto.setTipoCaja(autoDTO.getTipoCaja());
+        auto.setImgUrl(autoDTO.getImgUrl());
+        auto.setPuertas(autoDTO.getPuertas());
+        auto.setValijas(autoDTO.getValijas());
+        auto.setPrecio(autoDTO.getPrecio());
+        auto.setCategoria(autoDTO.getCategoria());
+        auto.setImagenes(autoDTO.getImagenes());
+        auto.setIconos(autoDTO.getIconos());
+        return auto;
     }
 }

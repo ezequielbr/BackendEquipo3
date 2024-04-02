@@ -4,6 +4,7 @@ import com.Car4All.Proyecto.entity.Auto;
 import com.Car4All.Proyecto.entity.Reserva;
 import com.Car4All.Proyecto.entity.Usuario;
 import com.Car4All.Proyecto.entity.dto.ReservaDTO;
+import com.Car4All.Proyecto.entity.dto.UsuarioDTO;
 import com.Car4All.Proyecto.exception.BadRequestException;
 import com.Car4All.Proyecto.exception.ResourceNotFoundException;
 import com.Car4All.Proyecto.repository.ReservaRepository;
@@ -32,19 +33,19 @@ public class ReservaService {
     public Reserva guardarReserva(ReservaDTO reserva) throws BadRequestException, ResourceNotFoundException {
         logger.info("Se esta llevando a cabo el proceso de Guardar Reserva");
         Reserva reserva1 = mapper.convertValue(reserva, Reserva.class);
-        Optional<Auto> auto = autoService.buscarPorId(Math.toIntExact(reserva.getAutoId()));
-        Optional<Usuario> usuario = usuarioService.buscarPorId(reserva.getUsuarioId());
-        if (auto.isPresent() && usuario.isPresent()){
-            Set<Reserva> reservas= auto.get().getReservas();
-            for(Reserva reserva2 : reservas){
+        Optional<Auto> autoOptional = autoService.buscarPorId(Math.toIntExact(reserva.getAutoId()));
+        Optional<Usuario> usuarioOptional = usuarioService.buscarPorId(reserva.getUsuarioId());
+
+        if (autoOptional.isPresent() && usuarioOptional.isPresent()){
+            for(Reserva reserva2 : buscarReservasPorAutoId(reserva.getAutoId())){
                 if (reserva.getFechaInicio().isEqual(reserva2.getFechaInicio()) ||
                         reserva.getFechaFin().isEqual(reserva2.getFechaFin()) ||
                         (reserva.getFechaInicio().isBefore(reserva2.getFechaFin()) && reserva.getFechaFin().isAfter(reserva2.getFechaInicio()))) {
                     throw new BadRequestException("No se puede realizar la reserva en fechas donde el auto se encuentra reservado");
                 }
             }
-            reserva1.setUsuario(usuario.get());
-            reserva1.setAuto(auto.get());
+            reserva1.setUsuario(usuarioOptional.get());
+            reserva1.setAuto(autoOptional.get());
             return reservaRepository.save(reserva1);
         }else {
             throw new ResourceNotFoundException("El auto con el id: "+reserva.getAutoId()+" no existe dentro de la base de datos");
@@ -55,10 +56,15 @@ public class ReservaService {
 //        Reserva reserva1 = mapper.convertValue(reserva, Reserva.class);
 //        return reservaRepository.save(reserva1);
 //    }
-    public void eliminarReserva(Long id){
-        logger.info("Se esta llevando a cabo el proceso de Eliminar Reserva");
+public void eliminarReserva(Long id) throws ResourceNotFoundException {
+    logger.info("Se está llevando a cabo el proceso de Eliminar Reserva");
+    Optional<Reserva> reservaOptional = reservaRepository.findById(id);
+    if (reservaOptional.isPresent()) {
         reservaRepository.deleteById(id);
+    } else {
+        logger.warn("No se encontró la reserva con el id: {}", id);
     }
+}
     public Optional<Reserva> buscarPorId(Long id){
         logger.info("Se esta llevando a cabo el proceso de buscar Reserva por Id");
         return reservaRepository.findById(id);
@@ -75,5 +81,44 @@ public class ReservaService {
         logger.info("Se esta llevando a cabo el proceso de Listar Reservas");
         return reservaRepository.findAll();
     }
+    public Optional<Auto> agregarReservaAlAuto(Integer id, Integer autoId) throws ResourceNotFoundException {
+        Optional<Auto> autoOptional = autoService.buscarPorId(id);
+        Optional<Reserva> reservaOptional = reservaRepository.findById(Long.valueOf(autoId));
 
+        if (reservaOptional.isPresent() && autoOptional.isPresent()) {
+            Reserva reserva = reservaOptional.get();
+            Auto auto = autoOptional.get();
+
+            auto.getReservas().add(reserva);
+            autoService.actualizarAuto(autoService.convertirAAutoDTO(auto));
+
+            return Optional.of(auto);
+        } else {
+            return Optional.empty();
+        }
+    }
+    public Optional<Auto> eliminarReservaAlAuto(Integer id, Integer autoId) throws ResourceNotFoundException {
+        Optional<Auto> autoOptional = autoService.buscarPorId(id);
+        Optional<Reserva> reservaOptional = reservaRepository.findById(Long.valueOf(autoId));
+
+        if (reservaOptional.isPresent() && autoOptional.isPresent()) {
+            Reserva reserva = reservaOptional.get();
+            Auto auto = autoOptional.get();
+
+            auto.getReservas().remove(reserva);
+            autoService.actualizarAuto(autoService.convertirAAutoDTO(auto));
+            reservaRepository.deleteById(reserva.getId());
+
+            return Optional.of(auto);
+        } else {
+            return Optional.empty();
+        }
+    }
+    public Set<Reserva> buscarReservasPorAutoId(Long autoId) throws ResourceNotFoundException {
+        Optional<Auto> autoOptional = autoService.buscarPorId(Math.toIntExact(autoId));
+        if(autoOptional.isPresent()){
+            return reservaRepository.findReservaByAuto_Id(autoId);
+        } else throw new ResourceNotFoundException("No se encontro el auto con el id: "+ autoId);
+
+    }
 }
