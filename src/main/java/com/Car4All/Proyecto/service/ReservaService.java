@@ -2,6 +2,7 @@ package com.Car4All.Proyecto.service;
 
 import com.Car4All.Proyecto.entity.Auto;
 import com.Car4All.Proyecto.entity.Reserva;
+import com.Car4All.Proyecto.entity.Usuario;
 import com.Car4All.Proyecto.entity.dto.ReservaDTO;
 import com.Car4All.Proyecto.exception.BadRequestException;
 import com.Car4All.Proyecto.exception.ResourceNotFoundException;
@@ -26,11 +27,14 @@ public class ReservaService {
     private ReservaRepository reservaRepository;
     @Autowired
     private AutoService autoService;
+    @Autowired
+    private UsuarioService usuarioService;
     public Reserva guardarReserva(ReservaDTO reserva) throws BadRequestException, ResourceNotFoundException {
         logger.info("Se esta llevando a cabo el proceso de Guardar Reserva");
         Reserva reserva1 = mapper.convertValue(reserva, Reserva.class);
         Optional<Auto> auto = autoService.buscarPorId(Math.toIntExact(reserva.getAutoId()));
-        if (auto.isPresent()){
+        Optional<Usuario> usuario = usuarioService.buscarPorId(reserva.getUsuarioId());
+        if (auto.isPresent() && usuario.isPresent()){
             Set<Reserva> reservas= auto.get().getReservas();
             for(Reserva reserva2 : reservas){
                 if (reserva.getFechaInicio().isEqual(reserva2.getFechaInicio()) ||
@@ -39,6 +43,8 @@ public class ReservaService {
                     throw new BadRequestException("No se puede realizar la reserva en fechas donde el auto se encuentra reservado");
                 }
             }
+            reserva1.setUsuario(usuario.get());
+            reserva1.setAuto(auto.get());
             return reservaRepository.save(reserva1);
         }else {
             throw new ResourceNotFoundException("El auto con el id: "+reserva.getAutoId()+" no existe dentro de la base de datos");
