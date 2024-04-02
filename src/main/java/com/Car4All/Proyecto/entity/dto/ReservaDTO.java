@@ -8,7 +8,6 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 @NoArgsConstructor
 public class ReservaDTO {
-    private Long id;
     @NonNull
     private Long usuarioId;
     @NonNull
@@ -17,6 +16,4 @@ public class ReservaDTO {
     private LocalDate fechaInicio;
     @NonNull
     private LocalDate fechaFin;
-
-
 }

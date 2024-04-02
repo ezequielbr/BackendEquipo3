@@ -81,39 +81,6 @@ public void eliminarReserva(Long id) throws ResourceNotFoundException {
         logger.info("Se esta llevando a cabo el proceso de Listar Reservas");
         return reservaRepository.findAll();
     }
-    public Optional<Auto> agregarReservaAlAuto(Integer id, Integer autoId) throws ResourceNotFoundException {
-        Optional<Auto> autoOptional = autoService.buscarPorId(id);
-        Optional<Reserva> reservaOptional = reservaRepository.findById(Long.valueOf(autoId));
-
-        if (reservaOptional.isPresent() && autoOptional.isPresent()) {
-            Reserva reserva = reservaOptional.get();
-            Auto auto = autoOptional.get();
-
-            auto.getReservas().add(reserva);
-            autoService.actualizarAuto(autoService.convertirAAutoDTO(auto));
-
-            return Optional.of(auto);
-        } else {
-            return Optional.empty();
-        }
-    }
-    public Optional<Auto> eliminarReservaAlAuto(Integer id, Integer autoId) throws ResourceNotFoundException {
-        Optional<Auto> autoOptional = autoService.buscarPorId(id);
-        Optional<Reserva> reservaOptional = reservaRepository.findById(Long.valueOf(autoId));
-
-        if (reservaOptional.isPresent() && autoOptional.isPresent()) {
-            Reserva reserva = reservaOptional.get();
-            Auto auto = autoOptional.get();
-
-            auto.getReservas().remove(reserva);
-            autoService.actualizarAuto(autoService.convertirAAutoDTO(auto));
-            reservaRepository.deleteById(reserva.getId());
-
-            return Optional.of(auto);
-        } else {
-            return Optional.empty();
-        }
-    }
     public Set<Reserva> buscarReservasPorAutoId(Long autoId) throws ResourceNotFoundException {
         Optional<Auto> autoOptional = autoService.buscarPorId(Math.toIntExact(autoId));
         if(autoOptional.isPresent()){
