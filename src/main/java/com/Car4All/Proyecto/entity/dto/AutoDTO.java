@@ -1,6 +1,14 @@
 package com.Car4All.Proyecto.entity.dto;
 
+import com.Car4All.Proyecto.entity.Auto;
+import com.Car4All.Proyecto.entity.Carrito;
+import com.Car4All.Proyecto.entity.Categoria;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -17,7 +25,7 @@ public class AutoDTO {
     private Integer personas;
     @NonNull
     private String tipoCaja;
-    @NonNull
+
     private String imgUrl;
     @NonNull
     private Integer puertas;
@@ -26,15 +34,8 @@ public class AutoDTO {
     @NonNull
     private Double precio;
 
-    public AutoDTO(String modelo, String marca, Integer personas, String tipoCaja, Integer puertas, Integer valijas, Double precio) {
-        this.modelo = modelo;
-        this.marca = marca;
-        this.personas = personas;
-        this.tipoCaja = tipoCaja;
-        this.puertas = puertas;
-        this.valijas = valijas;
-        this.precio = precio;
-    }
+    private Categoria categoria;
+
 
 
 }

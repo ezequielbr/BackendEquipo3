@@ -61,7 +61,10 @@ public class Usuario /*implements UserDetails*/ {
     @JoinColumn(name = "valoracion_id",referencedColumnName = "id")
     @JsonIgnore
     private Set<Valoracion> valoraciones= new HashSet<>();
-
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "reserva_id",referencedColumnName = "id")
+//    @JsonIgnore
+//    private Reserva reserva = new Reserva();
     public Usuario(@NonNull String password, @NonNull String email, @NonNull UsuarioRol usuarioRol, @NonNull String nombre) {
         this.password = password;
         this.email = email;

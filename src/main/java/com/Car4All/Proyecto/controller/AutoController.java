@@ -1,9 +1,11 @@
 package com.Car4All.Proyecto.controller;
 
+import com.Car4All.Proyecto.entity.Categoria;
 import com.Car4All.Proyecto.entity.dto.AutoDTO;
 import com.Car4All.Proyecto.entity.Auto;
 import com.Car4All.Proyecto.exception.ResourceNotFoundException;
 import com.Car4All.Proyecto.service.AutoService;
+import com.Car4All.Proyecto.service.CategoriaService;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,9 @@ import java.util.Optional;
 public class AutoController {
     private static final Logger logger= LogManager.getLogger(AutoController.class);
     @Autowired
-    private AutoService autoService= new AutoService();
+    private AutoService autoService;
+    @Autowired
+    private CategoriaService categoriaService;
     @PostMapping
     public ResponseEntity<?> registrarAuto(@RequestBody AutoDTO auto){
         logger.info("Llego la peticion de registrar el auto: "+auto.getModelo());
@@ -50,9 +54,7 @@ public class AutoController {
             logger.info("No se encontro el auto con el id: "+id);
             throw new ResourceNotFoundException("No se pudo encontrar el auto con el id: "+id+".");
         }
-
     }
-
     @GetMapping
     public ResponseEntity<List<Auto>> listarAutos() throws ResourceNotFoundException{
         logger.info("Llego la peticion de listar todos los autos");

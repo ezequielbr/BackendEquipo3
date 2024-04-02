@@ -1,12 +1,15 @@
 package com.Car4All.Proyecto.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -47,8 +50,9 @@ public class Auto {
     @ManyToMany(mappedBy = "autos", fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Carrito> carritos= new HashSet<>();
-    @ManyToMany(mappedBy ="autos", fetch = FetchType.LAZY)
-    private Set<Categoria> categorias= new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name ="categoria_id", referencedColumnName = "id")
+    private Categoria categoria;
     @ManyToMany(mappedBy ="autos", fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Favoritos> favoritos= new HashSet<>();
