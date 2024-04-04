@@ -20,7 +20,7 @@ public class DatabaseConfig {
     public DataSource dataSource() {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName("org.h2.Driver");
-        dataSourceBuilder.url("jdbc:h2:file:./Base de datos/Car4All");
+        dataSourceBuilder.url("jdbc:h2:file:./database/Car4All");
         dataSourceBuilder.username(dbUsername);
         dataSourceBuilder.password(dbPassword);
         return dataSourceBuilder.build();
