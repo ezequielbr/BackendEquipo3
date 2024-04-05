@@ -30,8 +30,8 @@ public class ReservaService {
     private AutoService autoService;
     @Autowired
     private UsuarioService usuarioService;
-    @Autowired
-    private EmailService emailService;
+//    @Autowired
+//    private EmailService emailService;
     public Reserva guardarReserva(ReservaDTO reserva) throws BadRequestException, ResourceNotFoundException {
         logger.info("Se esta llevando a cabo el proceso de Guardar Reserva");
         Reserva reserva1 = mapper.convertValue(reserva, Reserva.class);
@@ -46,7 +46,7 @@ public class ReservaService {
                     throw new BadRequestException("No se puede realizar la reserva en fechas donde el auto se encuentra reservado");
                 }
             }
-            emailService.enviarCorreoConfirmacionReserva(usuarioOptional.get().getEmail());
+//            emailService.enviarCorreoConfirmacionReserva(usuarioOptional.get().getEmail());
             reserva1.setUsuario(usuarioOptional.get());
             reserva1.setAuto(autoOptional.get());
             return reservaRepository.save(reserva1);

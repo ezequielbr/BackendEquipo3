@@ -3,7 +3,7 @@ package com.Car4All.Proyecto.controller;
 import com.Car4All.Proyecto.entity.Usuario;
 import com.Car4All.Proyecto.entity.dto.UsuarioDTO;
 import com.Car4All.Proyecto.exception.ResourceNotFoundException;
-import com.Car4All.Proyecto.service.EmailService;
+//import com.Car4All.Proyecto.service.EmailService;
 import com.Car4All.Proyecto.service.UsuarioService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,8 +21,8 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
-    @Autowired
-    private EmailService emailService;
+//    @Autowired
+//    private EmailService emailService;
     @PostMapping
     public ResponseEntity<Usuario> registrarUsuario(@RequestBody UsuarioDTO usuario){
         logger.info("Llego la peticion de registrar el usuario: "+usuario);
@@ -35,7 +35,7 @@ public class UsuarioController {
         if(usuarioBuscado.isPresent()){
             logger.info("Se actualizo el usuario: " + usuario);
             Usuario usuario1 = usuarioService.actualizarUsuario(usuario);
-            emailService.enviarCorreoConfirmacion(usuario1.getEmail());
+//            emailService.enviarCorreoConfirmacion(usuario1.getEmail());
             return ResponseEntity.ok("Usuario: "+usuario.getNombre()+" actualizado con exito.");
         }else{
             logger.info("No se actualizo el usuario: " + usuario);
