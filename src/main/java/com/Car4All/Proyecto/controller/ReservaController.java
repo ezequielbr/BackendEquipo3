@@ -4,6 +4,7 @@ import com.Car4All.Proyecto.entity.dto.ReservaDTO;
 import com.Car4All.Proyecto.exception.BadRequestException;
 import com.Car4All.Proyecto.exception.ResourceNotFoundException;
 import com.Car4All.Proyecto.entity.Reserva;
+import com.Car4All.Proyecto.service.EmailService;
 import com.Car4All.Proyecto.service.ReservaService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,7 +21,8 @@ import java.util.Optional;
 public class ReservaController {
     private static final Logger logger= LogManager.getLogger(ReservaController.class);
     @Autowired
-    private ReservaService reservaService= new ReservaService();
+    private ReservaService reservaService;
+
     @PostMapping
     public ResponseEntity<Reserva> registrarReserva(@RequestBody ReservaDTO reserva) throws BadRequestException, ResourceNotFoundException {
         logger.info("Llego la peticion de registrar la reserva: "+reserva);

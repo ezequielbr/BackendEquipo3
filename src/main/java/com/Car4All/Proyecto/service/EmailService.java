@@ -19,22 +19,39 @@ public class EmailService {
     @Autowired
     private TemplateEngine templateEngine;
 
-    public void enviarCorreoConfirmacion(String destinatario) {
+    public void enviarCorreoConfirmacion(String email) {
         MimeMessage message = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         try {
-            helper.setTo(destinatario);
+            helper.setTo(email);
             helper.setSubject("Confirmación de registro");
-            String htmlContent = cargarTemplate();
+            String htmlContent = cargarTemplateConfirmacion();
             helper.setText(htmlContent, true);
         } catch (MessagingException e) {
-            // Manejar la excepción
+
         }
         emailSender.send(message);
     }
 
-    private String cargarTemplate() {
+    private String cargarTemplateConfirmacion() {
         Context context = new Context();
-        return templateEngine.process("confirmacion", context);
+        return templateEngine.process("confirmacionRegistro", context);
+    }
+    public void enviarCorreoConfirmacionReserva(String email) {
+        MimeMessage message = emailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+        try {
+            helper.setTo(email);
+            helper.setSubject("Confirmación de reserva");
+            String htmlContent = cargarTemplateReserva();
+            helper.setText(htmlContent, true);
+        } catch (MessagingException e) {
+
+        }
+        emailSender.send(message);
+    }
+    private String cargarTemplateReserva() {
+        Context context = new Context();
+        return templateEngine.process("confirmacionReserva", context);
     }
 }
